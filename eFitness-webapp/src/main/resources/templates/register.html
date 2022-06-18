@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link th:href="@{/css/login-register.css}" rel="stylesheet">
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="principal-box register-box">
+    <header class="lb-header">
+        <span id="title">Register</span>
+    </header>
+    <form th:action="@{/user/register}" method="POST" class="signup">
+        <div class="u-form-group">
+            <input type="text" placeholder="Username" required
+                   th:field="${credentials.username}"/>
+            <div class="errors" th:if="${#fields.hasErrors('credentials.username')}"
+                  th:errors="${credentials.username}"></div>
+        </div>
+        <div class="u-form-group">
+            <input type="password" placeholder="Password" required
+                   th:field="${credentials.password}"/>
+            <div class="errors" th:if="${#fields.hasErrors('credentials.password')}"
+                  th:errors="${credentials.password}"></div>
+        </div>
+        <div class="u-form-group">
+            <input type="text" placeholder="Name" required
+                   th:field="${user.name}"/>
+            <div class="errors" th:if="${#fields.hasErrors('user.name')}"
+                  th:errors="${user.name}"></div>
+        </div>
+        <div class="u-form-group">
+            <input type="text" placeholder="Surname" required
+                       th:field="${user.surname}"/>
+            <div class="errors" th:if="${#fields.hasErrors('user.surname')}"
+                th:errors="${user.surname}"></div>
+        </div>
+        <div class="u-form-group">
+            <input type="text" placeholder="Email" required
+                       th:field="${user.email}"/>
+            <div class="errors" th:if="${#fields.hasErrors('user.email')}"
+                th:errors="${user.email}"></div>
+        </div>
+        <div class="u-form-group">
+            <button type="submit">Registrati</button>
+        </div>
+        <div class="u-form-group">
+            <span class="not-registered">Already registered?</span>
+            <a th:href="@{/login}" class="register">Login</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
