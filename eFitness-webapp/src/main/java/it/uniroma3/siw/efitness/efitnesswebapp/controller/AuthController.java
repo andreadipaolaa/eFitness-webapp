@@ -50,8 +50,8 @@ public class AuthController {
         if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            return "user/registrationSuccessful";
+            return "registrationSuccessful";
         }
-        return "user/register";
+        return "register";
     }
 }
