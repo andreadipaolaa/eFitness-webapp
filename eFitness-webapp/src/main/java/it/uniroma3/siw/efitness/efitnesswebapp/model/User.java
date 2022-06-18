@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity @Getter @Setter
 @Table(name="users") //in postgres user is a reserved key
@@ -17,4 +18,7 @@ public class User {
 	private String surname;
 
 	private String email;
+
+	@ManyToMany
+	private List<Course> courses;
 }
