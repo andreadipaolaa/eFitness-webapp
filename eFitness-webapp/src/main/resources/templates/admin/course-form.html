@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin-base.html :: headerfiles(title=#{title.course.add}, css='/css/admin/admin.css')"></head>
+<body>
+<header th:replace="fragments/admin-base.html :: header(#{header.course.add})"></header>
+<form class="form" th:action="@{/admin/trainer/add}" method="POST" th:object="${course}">
+    <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
+    <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
+    <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
+
+
+    <div class="radio">
+        <div class="radio-element">
+            <input id="radio-1" type="radio"  name="radio" value="1">
+            <label for="radio-1"></label>
+        </div>
+
+        <div class="radio-element">
+            <input id="radio-2" type="radio" name="radio" value="2" checked>
+            <label for="radio-2"></label>
+        </div>
+    </div>
+
+</form>
+</body>
+</html>
