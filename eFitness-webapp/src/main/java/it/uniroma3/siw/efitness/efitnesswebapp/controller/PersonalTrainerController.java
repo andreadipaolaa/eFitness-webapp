@@ -1,6 +1,9 @@
+
 package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,10 +16,13 @@ import java.util.List;
 @RequestMapping("admin/trainer/")
 public class PersonalTrainerController {
 
+    @Autowired
+    private PersonalTrainerService personalTrainerService;
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String getTrainers(Model model) {
-        //List<PersonalTrainer> trainers = personalTrainerService.findAll();
-        //model.addAttribute("trainers", trainers);
+        List<PersonalTrainer> trainers = this.personalTrainerService.getAll();
+        model.addAttribute("trainers", trainers);
         return "admin/trainer-list";
     }
 
@@ -28,7 +34,7 @@ public class PersonalTrainerController {
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
     public String addTrainer(@ModelAttribute("trainer") PersonalTrainer trainer, Model model) {
-        //personalTrainerService.saveTrainer(trainer);
+        this.personalTrainerService.save(trainer);
         return getTrainers(model);
     }
 }
