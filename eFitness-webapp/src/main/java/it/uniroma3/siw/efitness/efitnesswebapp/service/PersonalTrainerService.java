@@ -34,6 +34,16 @@ public class PersonalTrainerService {
         this.personalTrainerRepository.deleteById(id);
     }
 
+    @Transactional
+    public void modifyById(Long id, PersonalTrainer trainer){
+        PersonalTrainer toModify = getPersonalTrainerById(id);
+        toModify.setName(trainer.getName());
+        toModify.setSurname(trainer.getSurname());
+        toModify.setDescription(trainer.getDescription());
+        toModify.setPhoto(trainer.getPhoto());
+        save(toModify);
+    }
+
     public boolean alreadyExists(PersonalTrainer personalTrainer){
         List<PersonalTrainer> personalTrainers= this.personalTrainerRepository.findByNameAndSurname(personalTrainer.getName(), personalTrainer.getSurname());
         if (personalTrainers.size() >0)

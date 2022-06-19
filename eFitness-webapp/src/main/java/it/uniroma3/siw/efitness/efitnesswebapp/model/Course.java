@@ -34,4 +34,6 @@ public class Course {
     @OneToOne
     private Room room;
 
+    private String photo;
+
 }

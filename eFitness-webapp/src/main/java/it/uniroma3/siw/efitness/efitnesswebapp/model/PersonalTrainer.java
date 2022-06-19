@@ -26,5 +26,6 @@ public class PersonalTrainer {
     @OneToMany(mappedBy = "personalTrainer")
     private List<Course> courses;
 
+    private String photo;
 
 }
