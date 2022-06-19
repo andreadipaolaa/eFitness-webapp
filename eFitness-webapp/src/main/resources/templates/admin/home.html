@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Admin Home', css='/css/admin-home.css')">
+</head>
+<body>
+<header th:replace="fragments/base.html :: header('prova')"></header>
+<div class="cards">
+    <div class="card">
+        <ion-icon class="card-image" name="happy-outline"></ion-icon>
+        <a class="button" th:href="@{/admin/trainer/list}" th:text="#{trainer.list}">Trainer List</a>
+        <a class="button" th:href="@{/admin/trainer/add}" th:text="#{trainer.add}">Add Trainer</a>
+    </div>
+    <div class="card">
+        <ion-icon class="card-image" name="barbell-outline"></ion-icon>
+        <a class="button" th:href="@{/admin/course/list}" th:text="#{course.list}">Course List</a>
+        <a class="button" th:href="@{/admin/course/add}" th:text="#{course.add}">Add Course</a>
+    </div>
+</div>
+</body>
+</html>
