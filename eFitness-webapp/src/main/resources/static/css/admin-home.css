@@ -1,0 +1,35 @@
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    margin: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.3rem;
+    border: 0.15rem solid #6d5dfc;
+    border-radius: 0.3rem;
+    height: auto;
+    width: 10rem;
+}
+
+.card-image {
+    border-bottom: 0.1rem solid #6d5dfc;
+    width: 3rem;
+    font-size: 3rem;
+    aspect-ratio: 1;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.3rem;
+}
+
+.button {
+    height: 2rem;
+    width: 80%;
+}
+
+@media screen and (max-width: 34rem) { html { font-size: 20px; } }

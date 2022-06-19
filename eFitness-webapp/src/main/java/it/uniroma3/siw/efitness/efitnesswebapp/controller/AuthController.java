@@ -6,6 +6,10 @@ import it.uniroma3.siw.efitness.efitnesswebapp.service.CredentialsService;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.CredentialsValidator;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,8 +54,18 @@ public class AuthController {
         if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            return "registrationSuccessful";
+            return "registration-successful";
         }
         return "register";
+    }
+
+    @RequestMapping(value = "/default", method = RequestMethod.GET)
+    public String defaultAfterLogin() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+            return "admin/home";
+        }
+        return "user/home";
     }
 }
