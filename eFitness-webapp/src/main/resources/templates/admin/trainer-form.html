@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin-base.html :: headerfiles(title=#{title.trainer.add}, css='/css/admin/admin.css')"></head>
 <body>
-
+<header th:replace="fragments/admin-base.html :: header(#{header.trainer.add})"></header>
+<form class="form" th:action="@{/admin/trainer/add}" method="POST" th:object="${trainer}">
+    <div class="flex">
+        <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
+        <input class="form-input" spellcheck="false" type="text" th:field="*{surname}" placeholder="Surname" required />
+    </div>
+    <div>
+        <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
+    </div>
+    <div>
+        <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
+    </div>
+</form>
 </body>
 </html>

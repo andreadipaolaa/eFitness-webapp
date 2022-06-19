@@ -1,0 +1,24 @@
+/* UTILS */
+.auto-width { width: auto; }
+
+.auto-margin { margin: auto; }
+
+.space-around { justify-content: space-around; }
+
+.vertical { flex-direction: column; }
+
+.flex { display: flex; }
+
+.horizontal { flex-direction: row; }
+
+.no-border { border: none }
+
+.margin1 { margin: 1rem }
+
+.align-items-center { align-items: center }
+
+.justify-center { justify-content: center }
+
+.wide15 { width: 15rem }
+
+.space-between { justify-content: space-between }
