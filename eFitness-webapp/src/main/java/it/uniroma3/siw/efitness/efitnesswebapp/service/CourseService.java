@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
+
 
     @Transactional
     public Course save(Course course){
@@ -24,6 +26,7 @@ public class CourseService {
     public List<Course> getAll(){
         return (List<Course>) this.courseRepository.findAll();
     }
+
 
     public Course getCourseById(Long id){
         Optional<Course> result = this.courseRepository.findById(id);
@@ -42,5 +45,15 @@ public class CourseService {
             return true;
         else
             return false;
+    }
+
+    @Transactional
+    public void modifyById(Long id, Course course){
+        Course toModify = getCourseById(id);
+        toModify.setName(course.getName());
+        toModify.setDescription(course.getDescription());
+        toModify.setRoom(course.getRoom());
+        toModify.setPhoto(course.getPhoto());
+        save(toModify);
     }
 }
