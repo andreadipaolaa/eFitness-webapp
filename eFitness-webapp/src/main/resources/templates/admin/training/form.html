@@ -3,13 +3,10 @@
 <head th:replace="fragments/admin-base.html :: headerfiles(title=#{title.training.add}, css='/css/admin/admin.css')"></head>
 <body>
 <header th:replace="fragments/admin-base.html :: header(#{header.training.add})"></header>
-<form class="form" th:action="@{/admin/trainer/add}" method="POST" th:object="${training}" enctype="multipart/form-data">
-    <div class="flex">
+<form class="form" th:action="@{/admin/training/add}" method="POST" th:object="${training}">
+    <div class="flex space-between">
         <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
-    </div>
-
-    <div>
-        <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
+        <button class="button2" type="submit" th:text="#{trainer.add}">Add Training</button>
     </div>
 </form>
 </body>

@@ -35,13 +35,13 @@ public class PersonalTrainerController {
     public String getTrainers(Model model) {
         List<PersonalTrainer> trainers = this.personalTrainerService.getAll();
         model.addAttribute("trainers", trainers);
-        return "admin/trainer-list";
+        return "admin/trainer/list";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addTrainer (Model model) {
         model.addAttribute("trainer", new PersonalTrainer());
-        return "admin/trainer-form";
+        return "admin/trainer/form";
     }
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
@@ -54,8 +54,7 @@ public class PersonalTrainerController {
             this.personalTrainerService.save(trainer);
             return getTrainers(model);
         }
-        else
-            return "admin/trainer-form";
+        return "admin/trainer/form";
     }
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
@@ -73,7 +72,7 @@ public class PersonalTrainerController {
     @RequestMapping(value ={"modify/{id}"}, method = RequestMethod.GET)
     public String modifyTrainer( @PathVariable("id") Long idTrainer, Model model ){
         model.addAttribute("trainer", this.personalTrainerService.getPersonalTrainerById(idTrainer));
-        return "admin/trainer-modify-form";
+        return "admin/trainer/modify";
     }
 
     @RequestMapping(value ={"modify/{id}"}, method = RequestMethod.POST)
@@ -83,7 +82,7 @@ public class PersonalTrainerController {
         if(!bindingResult.hasErrors()) {
             trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
             this.personalTrainerService.modifyById(idTrainer, trainer);
-            return "admin/trainer-list";
+            return "admin/trainer/list";
         }
         else
             return "admin/trainer-modify-form";
