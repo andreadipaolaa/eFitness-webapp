@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title, css)">
+  <meta charset="ISO-8859-1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" th:href="@{/images/favicon/logo.ico}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+  <title th:text="${title}"></title>
+  <link rel="stylesheet" th:href="@{/css/base.css}">
+  <link rel="stylesheet" th:href="${css}">
+</head>
+<body>
+<nav th:fragment="intestazione">
+  <div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+      <img class = "logo" src="/images/logoOrizzNero.png">
+    </div>
+    <div class="nav-btn">
+      <label for="nav-check"> <span></span> <span></span> <span></span>
+      </label>
+    </div>
+
+    <div class="nav-links">
+      <a th:href="@{/home}">Home</a>
+      <a th:href="@{/buffet/elenco}" >I nostri trainer</a>
+      <a th:href="@{/chef/elenco}">I nostri corsi</a>
+      <a th:href="@{/}">Area Personale</a>
+    </div>
+  </div>
+</nav>
+<footer th:fragment="footer">
+  <div class="container">
+    <div class="row">
+      <div class="right-text-content">
+        <p>
+          <strong>Location:</strong> Via Orso Mario Corbino 20/22, 00146, Roma, Italy  <br> <strong>Telefono:</strong> +39-3476011862 <br>
+          <strong>Email: </strong> emsromamarconi@efitness-studio.it
+        </p>
+      </div>
+      <div class="left-text-content">
+        <p>
+          © Copyright eFitness-studio <br>Design: Andreola Giordano, De Risi Simona, Di Paola Andrea
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
