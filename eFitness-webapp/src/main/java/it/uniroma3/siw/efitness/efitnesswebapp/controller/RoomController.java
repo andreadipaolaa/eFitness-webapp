@@ -3,10 +3,12 @@ package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Room;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.RoomService;
 import it.uniroma3.siw.efitness.efitnesswebapp.util.FileManager;
+import it.uniroma3.siw.efitness.efitnesswebapp.validator.RoomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +18,9 @@ public class RoomController {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private RoomValidator roomValidator;
 
     public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/room/";
 
@@ -33,9 +38,26 @@ public class RoomController {
 
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
-    public String addRoom(@ModelAttribute("room") Room room, @RequestParam("image") MultipartFile multipartFile, Model model) {
-        room.setPhoto(savePhoto(multipartFile,room));
-        roomService.save(room);
+    public String addRoom(@ModelAttribute("room") Room room, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) {
+        this.roomValidator.validate(room, bindingResult);
+        if(!bindingResult.hasErrors()) {
+            room.setPhoto(savePhoto(multipartFile, room));
+            roomService.save(room);
+            return getRooms(model);
+        }
+        else
+            return "admin/room-form";
+    }
+
+    @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
+    public String deleteRoom(@PathVariable("id")Long id, Model model){
+        model.addAttribute("room", this.roomService.getRoomById(id));
+        return "confirmDeleteRoom";
+    }
+
+    @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
+    public String deleteRoomConfirmed(@PathVariable("id")Long id, Model model){
+        this.roomService.deleteById(id);
         return getRooms(model);
     }
 
@@ -48,10 +70,15 @@ public class RoomController {
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
     public String modifyRoom(@PathVariable("id") Long idRoom, @ModelAttribute("course") Room room,
-                               @RequestParam("image")MultipartFile multipartFile, Model model){
-        room.setPhoto(modifyPhoto(multipartFile, idRoom, room));
-        this.roomService.modifyById(idRoom,room);
-        return "admin/room-list";
+                               @RequestParam("image")MultipartFile multipartFile, Model model, BindingResult bindingResult){
+        this.roomValidator.validate(room,bindingResult);
+        if(!bindingResult.hasErrors()) {
+            room.setPhoto(modifyPhoto(multipartFile, idRoom, room));
+            this.roomService.modifyById(idRoom, room);
+            return "admin/room-list";
+        }
+        else
+            return "admin/room-modify-form";
     }
 
 
