@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>index</title>
+<head
+        th:replace="fragments/base.html :: headerfiles(title='eFitness-studio', css='/css/base.css')">
 </head>
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 <a th:href="@{/register}">Register</a>
 <a th:href="@{/login}">Login</a>
+<footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>
