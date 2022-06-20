@@ -20,4 +20,6 @@ public class Room {
     @Column(length=2500)
     private String description;
 
+    private String photo;
+
 }
