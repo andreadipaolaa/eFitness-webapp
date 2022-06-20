@@ -1,27 +1,27 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.validator;
 
-import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.TrainingType;
-import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.TrainingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class CourseValidator implements Validator {
+public class TrainingTypeValidator implements Validator {
 
     @Autowired
-    private CourseService courseService;
+    private TrainingTypeService trainingTypeService;
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Course.class.equals(clazz);
+        return TrainingType.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         if (!errors.hasErrors()){
-            if (this.courseService.AlreadyExists((Course) target))
-                errors.reject("course.duplicated");
+            if (this.trainingTypeService.AlreadyExists((TrainingType) target))
+                errors.reject("trainingType.duplicated");
         }
     }
 }
+
