@@ -10,11 +10,19 @@
         <a class="button" th:href="@{/admin/trainer/list}" th:text="#{trainer.list}">Trainer List</a>
         <a class="button" th:href="@{/admin/trainer/add}" th:text="#{trainer.add}">Add Trainer</a>
     </div>
+
     <div class="card">
         <ion-icon class="card-image" name="barbell-outline"></ion-icon>
-        <a class="button" th:href="@{/admin/course/list}" th:text="#{course.list}">Course List</a>
-        <a class="button" th:href="@{/admin/course/add}" th:text="#{course.add}">Add Course</a>
+        <a class="button" th:href="@{/admin/course/list}" >Courses</a>
+        <a class="button" th:href="@{/admin/course/add}" >Add</a>
     </div>
+
+    <div class="card">
+        <ion-icon class="card-image" name="analytics-outline"></ion-icon>
+        <a class="button" th:href="@{/admin/course/list}" >Training Types</a>
+        <a class="button" th:href="@{/admin/course/add}" >Add</a>
+    </div>
+
 </div>
 </body>
 </html>
