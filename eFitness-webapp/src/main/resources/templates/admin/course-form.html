@@ -5,9 +5,8 @@
 <header th:replace="fragments/admin-base.html :: header(#{header.course.add})"></header>
 <form class="form" th:action="@{/admin/trainer/add}" method="POST" th:object="${course}">
     <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
-    <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
-    <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
 
+    <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
 
     <div class="radio">
         <div class="radio-element">
@@ -21,6 +20,9 @@
         </div>
     </div>
 
+    <div>
+        <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
+    </div>
 </form>
 </body>
 </html>

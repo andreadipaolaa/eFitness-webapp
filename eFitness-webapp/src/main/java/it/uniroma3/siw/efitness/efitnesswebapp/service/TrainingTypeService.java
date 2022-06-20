@@ -1,6 +1,7 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
+import it.uniroma3.siw.efitness.efitnesswebapp.model.Room;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.TrainingType;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.TrainingTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class TrainingTypeService {
     @Transactional
     public void deleteById(Long id){
         this.trainingTypeRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void modifyById(Long id, TrainingType trainingType){
+        TrainingType toModify = getTrainingTypeById(id);
+        toModify.setName(trainingType.getName());
+        save(toModify);
     }
 
 
