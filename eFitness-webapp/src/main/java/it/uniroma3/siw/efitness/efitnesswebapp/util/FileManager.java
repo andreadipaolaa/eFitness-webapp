@@ -12,11 +12,10 @@ public class FileManager {
 
     /*creates the directory and stores the file in it */
     public static String store(MultipartFile file, String directory) {
-        new File(directory).mkdir();
+        new File(directory).mkdirs();
         Path fileNameAndPath  = Paths.get(directory, file.getOriginalFilename());
         try {
             Files.write(fileNameAndPath, file.getBytes());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

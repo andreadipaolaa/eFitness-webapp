@@ -4,10 +4,12 @@ package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
 import it.uniroma3.siw.efitness.efitnesswebapp.util.FileManager;
+import it.uniroma3.siw.efitness.efitnesswebapp.validator.PersonalTrainerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +23,13 @@ public class PersonalTrainerController {
     @Autowired
     private PersonalTrainerService personalTrainerService;
 
-    public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/personalTrainer/";
+
+    @Autowired
+    private PersonalTrainerValidator personalTrainerValidator;
+
+
+    public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/personalTrainer/";
+
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String getTrainers(Model model) {
@@ -38,9 +46,27 @@ public class PersonalTrainerController {
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
     public String addTrainer(@ModelAttribute("trainer") PersonalTrainer trainer,
-                             @RequestParam("image") MultipartFile multipartFile, Model model) {
-        trainer.setPhoto(savePhoto(multipartFile, trainer));
-        this.personalTrainerService.save(trainer);
+                             @RequestParam("image") MultipartFile multipartFile, Model model,
+                             BindingResult bindingResult) {
+        this.personalTrainerValidator.validate(trainer, bindingResult);
+        if(!bindingResult.hasErrors()) {
+            trainer.setPhoto(savePhoto(multipartFile, trainer));
+            this.personalTrainerService.save(trainer);
+            return getTrainers(model);
+        }
+        else
+            return "admin/trainer-form";
+    }
+
+    @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
+    public String deleteTrainer(@PathVariable("id")Long id, Model model){
+        model.addAttribute("trainer", this.personalTrainerService.getPersonalTrainerById(id));
+        return "confirmDeleteTrainer";
+    }
+
+    @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
+    public String deleteTrainerConfirmed(@PathVariable("id")Long id, Model model){
+        this.personalTrainerService.deleteById(id);
         return getTrainers(model);
     }
 
@@ -52,10 +78,15 @@ public class PersonalTrainerController {
 
     @RequestMapping(value ={"modify/{id}"}, method = RequestMethod.POST)
     public String modifyTrainer(@Valid @ModelAttribute("trainer") PersonalTrainer trainer, @RequestParam("image")MultipartFile multipartFile,
-                                @PathVariable("id") Long idTrainer, Model model ){
-        trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
-        this.personalTrainerService.modifyById(idTrainer, trainer);
-        return "admin/trainer-list";
+                                @PathVariable("id") Long idTrainer, Model model, BindingResult bindingResult ){
+        this.personalTrainerValidator.validate(trainer,bindingResult);
+        if(!bindingResult.hasErrors()) {
+            trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
+            this.personalTrainerService.modifyById(idTrainer, trainer);
+            return "admin/trainer-list";
+        }
+        else
+            return "admin/trainer-modify-form";
     }
 
     public String savePhoto(MultipartFile multipartFile, PersonalTrainer trainer){
@@ -78,6 +109,6 @@ public class PersonalTrainerController {
     }
 
     public String getUploadDir(PersonalTrainer trainer){
-        return DIR + trainer.getName().trim() + trainer.getSurname().trim();
+        return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
     }
 }
