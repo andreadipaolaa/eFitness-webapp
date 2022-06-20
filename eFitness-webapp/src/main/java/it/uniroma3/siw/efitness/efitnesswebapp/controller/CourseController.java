@@ -3,8 +3,6 @@ package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
-import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
-import it.uniroma3.siw.efitness.efitnesswebapp.service.TrainingTypeService;
 import it.uniroma3.siw.efitness.efitnesswebapp.util.FileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +18,6 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @Autowired
-    private PersonalTrainerService personalTrainerService;
-
-    @Autowired
-    private TrainingTypeService trainingTypeService;
-
     public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/course/";
 
     @RequestMapping(value={"list"}, method = RequestMethod.GET)
@@ -37,8 +29,6 @@ public class CourseController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addCourse (Model model) {
         model.addAttribute("course", new Course());
-        model.addAttribute("trainers", this.personalTrainerService.getAll());
-        model.addAttribute("trainings", this.trainingTypeService.getAll());
         return "admin/course-form";
     }
 
