@@ -18,7 +18,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/course/";
+    public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/course/";
 
     @RequestMapping(value={"list"}, method = RequestMethod.GET)
     public String getCourses(Model model){
@@ -76,6 +76,6 @@ public class CourseController {
     }
 
     public String getUploadDir(Course course){
-        return DIR + course.getName().trim();
+        return DIR + course.getName().replaceAll("\\s", "");
     }
 }

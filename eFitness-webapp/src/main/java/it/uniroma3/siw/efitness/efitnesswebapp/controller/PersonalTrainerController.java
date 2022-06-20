@@ -21,7 +21,7 @@ public class PersonalTrainerController {
     @Autowired
     private PersonalTrainerService personalTrainerService;
 
-    public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/personalTrainer/";
+    public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/personalTrainer/";
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String getTrainers(Model model) {
@@ -78,6 +78,6 @@ public class PersonalTrainerController {
     }
 
     public String getUploadDir(PersonalTrainer trainer){
-        return DIR + trainer.getName().trim() + trainer.getSurname().trim();
+        return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
     }
 }
