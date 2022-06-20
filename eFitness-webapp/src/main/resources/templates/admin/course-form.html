@@ -4,22 +4,29 @@
 <body>
 <header th:replace="fragments/admin-base.html :: header(#{header.course.add})"></header>
 <form class="form" th:action="@{/admin/trainer/add}" method="POST" th:object="${course}">
-    <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
-
-    <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
+    <div>
+        <div>Basic Infos</div>
+        <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
+        <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
+    </div>
 
     <div class="radio">
-        <div class="radio-element">
-            <input id="radio-1" type="radio"  name="radio" value="1">
-            <label for="radio-1"></label>
-        </div>
-
-        <div class="radio-element">
-            <input id="radio-2" type="radio" name="radio" value="2" checked>
-            <label for="radio-2"></label>
+        <div>Choose personal trainer</div>
+        <div class="radio-element" th:each="trainer : ${trainers}">
+            <input th:id="${trainer.id}" type="radio" name="trainer" th:value="${trainer}">
+            <label th:for="${trainer.id}"></label>
+            <span th:text="${trainer.name}+ ' ' +${trainer.surname}"></span>
         </div>
     </div>
 
+    <div class="radio">
+        <div>Choose training type</div>
+        <div class="radio-element" th:each="training : ${trainings}">
+            <input th:id="${training.id}" type="radio" name="trainer" th:value="${training}">
+            <label th:for="${training.id}"></label>
+            <span th:text="${training.name}"></span>
+        </div>
+    </div>
     <div>
         <button class="button2" type="submit" th:text="#{trainer.add}">Add Trainer</button>
     </div>
