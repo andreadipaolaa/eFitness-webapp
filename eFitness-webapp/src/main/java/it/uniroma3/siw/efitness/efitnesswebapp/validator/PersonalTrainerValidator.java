@@ -19,7 +19,7 @@ public class PersonalTrainerValidator implements Validator {
     public void validate(Object target, Errors errors) {
         if (!errors.hasErrors()){
             if (this.personalTrainerService.alreadyExists((PersonalTrainer) target))
-                errors.reject("personalTrainer.duplicato");
+                errors.reject("personalTrainer.duplicated");
         }
     }
 }
