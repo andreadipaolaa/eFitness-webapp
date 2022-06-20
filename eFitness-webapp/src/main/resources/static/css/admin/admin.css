@@ -1,4 +1,20 @@
-/* FORM INPUT */
+/*
+==================================================
+    FORM
+==================================================
+*/
+.form {
+    font-size: .7rem;
+    margin: auto;
+    width: 15rem;
+    justify-content: space-between;
+    border: 0.1rem solid #5b0eeb;
+    padding: 0.6rem 0.6rem 0.3rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .form-input, .form-textarea {
     margin: 0.3rem;
     font-size: .7rem;
@@ -13,9 +29,7 @@
     resize: none;
 }
 
-.form-input::placeholder, .form-textarea::placeholder {
-    color: #bec8e4;
-}
+.form-input::placeholder, .form-textarea::placeholder { color: #bec8e4; }
 
 .form-input:focus, .form-textarea:focus {
     outline: none;
@@ -32,7 +46,11 @@
     height: 4rem;
 }
 
-/* SEARCH */
+/*
+==================================================
+    SEARCH
+==================================================
+*/
 .search {
     position: relative;
     display: flex;
@@ -72,55 +90,89 @@
     transition: .3s ease;
 }
 
+/*
+==================================================
+    RADIO
+==================================================
+*/
+.radio { justify-items: center; }
 
+.radio input { display: none; }
 
-
-
-.form {
-    margin: auto;
-    width: 15rem;
-    justify-content: space-between;
-    border: 0.1rem solid #5b0eeb;
-    padding: 0.6rem 0.6rem 0.3rem;
-    border-radius: 0.3rem;
-    display: flex;
-    flex-direction: column;
+.radio-element input:checked ~ label {
+    box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem white;
 }
+.radio-element input:checked ~ label::after { background: #6d5dfc; }
 
-/*  RADIO  */
-.radio {
-    justify-items: center;
-}
-
-.radio-element {
-& input:checked {
-& ~ label {
-      box-shadow: $inner-shadow;
-&::after {
-     background: var(--primary);}
-}
-}
-label {
-    box-shadow: $shadow;
+.radio-element label {
+    box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem white;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 1rem;
+    aspect-ratio: 1;
     border-radius: 50%;
-&:hover {&::after{background: var(--primary);}}
+    margin-bottom: 0.3rem;
+}
+.radio-element label:hover::after { background: #6d5dfc; }
 
-&::after {
-     content: "";
-     position: absolute;
-     width: 1.4rem;
-     height: 1.4rem;
-     background: var(--greyDark);
-     border-radius: 50%;
-     transition: 0.3s ease;
- }
+.radio-element label::after {
+    content: "";
+    position: absolute;
+    width: .4rem;
+    aspect-ratio: 1;
+    background: #9baacf;
+    border-radius: 50%;
+    transition: 0.3s ease;
 }
+
+/*
+==================================================
+    FILE UPLOAD
+==================================================
+*/
+.file_upload {
+    position: relative;
+    width: 5rem;
+    text-align: center;
+    color: #6d5dfc;
+    line-height: 1.3rem;
+    background: inherit;
+    border-radius: .2rem;
+    border: solid 0.1rem #6d5dfc;
+    font-weight: 500;
 }
+
+a.file_upload { display: inline-block; }
+
+.file_upload .btn_lbl {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
+
+.file_upload .btn_color-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #E4EBF5;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.file_upload input[type="file"] {
+    position: absolute;
+    top: 0.2rem;
+    left: -4.3rem;
+    font-weight: 500;
+    margin-left: 100%;
+    color: #9baacf;
+    outline: none;
+}
+
+.cloud { transform: translateY(0.1rem); }
