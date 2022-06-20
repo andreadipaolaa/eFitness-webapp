@@ -19,10 +19,13 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+
     @Autowired
     private RoomValidator roomValidator;
 
-    public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/room/";
+
+    public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/room/";
+
 
     @RequestMapping(value={"list"}, method = RequestMethod.GET)
     public String getRooms(Model model){
@@ -102,6 +105,6 @@ public class RoomController {
     }
 
     public String getUploadDir(Room room){
-        return DIR + room.getName().trim();
+        return DIR + room.getName().replaceAll("\\s", "");
     }
 }
