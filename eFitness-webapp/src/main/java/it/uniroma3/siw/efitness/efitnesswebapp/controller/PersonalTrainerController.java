@@ -107,7 +107,7 @@ public class PersonalTrainerController {
         }
     }
 
-    public String getUploadDir(PersonalTrainer trainer){
+    public static String getUploadDir(PersonalTrainer trainer){
         return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
     }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+        th:replace="fragments/base.html :: headerfiles(title='Course Details', css='/css/user/detail.css')">
+</head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div class="singleton">
+    <img th:if="${course.photo != null}"
+         th:src="@{${directory}  + '/' + ${course.photo}}"></img>
+    <div class="info">
+        <h1 th:text="${course.name}">Paolo Rossi</h1>
+        <p th:text="${course.description}">
+            Description
+        </p>
+        <div th:text="#{course.detail.trainingType}"><span th:text="${course.trainingType.name}"></span>cardio</div>
+        </p>
+        <p th:text="#{course.detail.room}"> <a th:text="${course.room.name}" th:href="@{'/user/room/' + ${course.room.id}}"> </a>room 1</p>
+        </p>
+        <p th:text="#{course.detail.trainer}"> <a th:text="${course.personalTrainer.name} + ' ' +  ${course.personalTrainer.surname}" th:href="@{'/user/room/' + ${course.room.id}}"> </a> </p>
+    </div>
+</div>
+
+<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>
