@@ -106,7 +106,7 @@ public class CourseController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = getUploadDir(course);
         FileManager.store(multipartFile, uploadDir);
-        return fileName;
+        return getDirectoryName(course) + "/" + fileName;
     }
 
     public String modifyPhoto(MultipartFile multipartFile, Long id, Course newCourse){
@@ -116,10 +116,12 @@ public class CourseController {
             return savePhoto(multipartFile, newCourse);
         }
         FileManager.dirChangeName(getUploadDir(oldCourse), getUploadDir(newCourse));
-        return oldCourse.getPhoto();
+        return  getDirectoryName(newCourse) + "/" + oldCourse.getPhoto();
     }
 
-    public static String getUploadDir(Course course){
-        return DIR + course.getName().replaceAll("\\s", "");
+    public String getUploadDir(Course course){
+        return DIR + getDirectoryName(course);
     }
+
+    public String getDirectoryName(Course course){return course.getName().replaceAll("\\s", ""); }
 }

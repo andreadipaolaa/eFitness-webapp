@@ -86,7 +86,7 @@ public class PersonalTrainerController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = getUploadDir(trainer);
         FileManager.store(multipartFile, uploadDir);
-        return fileName;
+        return getDirectoryName(trainer) + "/" + fileName;
     }
 
     public String modifyPhoto(MultipartFile multipartFile, Long id, PersonalTrainer newTrainer){
@@ -96,10 +96,14 @@ public class PersonalTrainerController {
             return savePhoto(multipartFile, newTrainer);
         }
         FileManager.dirChangeName(getUploadDir(oldTrainer), getUploadDir(newTrainer));
-        return oldTrainer.getPhoto();
+        return getDirectoryName(newTrainer) + "/" + oldTrainer.getPhoto();
     }
 
-    public static String getUploadDir(PersonalTrainer trainer){
-        return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
+    public String getUploadDir(PersonalTrainer trainer){
+        return DIR + getDirectoryName(trainer);
+    }
+
+    public String getDirectoryName(PersonalTrainer personalTrainer){
+        return personalTrainer.getName().replaceAll("\\s", "") + personalTrainer.getSurname().replaceAll("\\s", "");
     }
 }
