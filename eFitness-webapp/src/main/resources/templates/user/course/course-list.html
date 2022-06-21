@@ -9,7 +9,7 @@
     <h1 class="title">Our Courses</h1>
     <div class="cards">
         <div th:each="course : ${courses}" class="card">
-            <img class="card-image" th:src="${course.photo}">
+            <img class="card-image" th:src="'/images/course/'+${course.name}+ '/' + ${course.photo}">
             <h3 th:text="${course.name}">nome</h3>
             <a th:href="@{'/user/course/' + ${course.id}}" class="button">read more</a>
         </div>
