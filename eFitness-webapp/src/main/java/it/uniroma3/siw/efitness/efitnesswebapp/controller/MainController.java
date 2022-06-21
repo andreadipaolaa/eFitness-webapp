@@ -1,11 +1,16 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
+import it.uniroma3.siw.efitness.efitnesswebapp.model.Credentials;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
+import it.uniroma3.siw.efitness.efitnesswebapp.model.User;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.CredentialsService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +29,9 @@ public class MainController {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private CredentialsService credentialsService;
 
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String getHome(Model model){
@@ -66,6 +74,18 @@ public class MainController {
     public String getRoom(@PathVariable("id") Long idRoom, Model model){
         model.addAttribute("room", this.roomService.getRoomById(idRoom));
         return "user/room/detailRoom";
+    }
+
+    @RequestMapping(value={"personal"}, method = RequestMethod.GET)
+    public String getProfile(Model model){
+        model.addAttribute("user", getActiveUser());
+        return "user/personalArea";
+    }
+
+    public User getActiveUser(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        return credentials.getUser();
     }
 
 

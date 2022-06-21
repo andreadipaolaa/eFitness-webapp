@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+        th:replace="fragments/base.html :: headerfiles(title='eFitness-studio', css='/css/user/personal.css')">
 </head>
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<section>
+    <div class="main-bd">
+        <div class="left-side">
+            <img src="/images/profile.png" />
+            <div class="profile-side">
+                <p class="mobile-no"><i class="fa fa-phone"></i> +23470xxxxx700</p>
+                <p class="user-mail"><i class="fa fa-envelope"></i> Brightisaac80@gmail.com</p>
+            </div>
+            <form action="@{/logout}">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        <div class="right-side">
+            <h2 th:text="#{personal.subscription}"></h2>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" th:text="#{personal.course}"></th>
+                        <th scope="col" th:text="#{personal.trainer}"></th>
+                        <th scope="col" th:text="#{personal.room}"></th>
+                        <th scope="col" th:text="#{personal.trainingType}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="course : ${user.courses}">
+                        <th th:text="${course.name}"></th>
+                        <th th:text="${course.personalTrainer.name} + ' ' + ${course.personalTrainer.surname}"></th>
+                        <th th:text="${course.room.name}"></th>
+                        <th th:text="${course.trainingType.name}"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+    </div>
+</section>
+<footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>
