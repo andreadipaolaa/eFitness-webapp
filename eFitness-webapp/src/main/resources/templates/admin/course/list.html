@@ -6,8 +6,8 @@
 <div class="list-element" th:each="course : ${courses}">
     <div th:text="${course.name}">Ginnastica</div>
     <div class="buttons">
-        <a class="button" th:href="@{'/admin/course/modify/' + ${course.id}}">modifica</a>
-        <a class="button" th:href="@{'/admin/course/delete/' + ${course.id}}">elimina</a>
+        <a class="button" th:href="@{'/admin/course/modify/' + ${course.id}}" th:text="#{modify}">modify</a>
+        <a class="button" th:href="@{'/admin/course/delete/' + ${course.id}}" th:text="#{delete}">delete</a>
     </div>
 </div>
 </body>

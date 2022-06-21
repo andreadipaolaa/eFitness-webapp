@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/admin-base.html :: headerfiles(title=#{title.training.list}, css='/css/admin/admin.css')"></head>
+<body>
+<header th:replace="fragments/admin-base.html :: header(#{header.training.list})"></header>
+<div class="list-element" th:each="training : ${trainings}">
+    <div th:text="${training.name}">Cardio</div>
+    <div class="buttons">
+        <a class="button" th:href="@{'/admin/training/modify/' + ${training.id}}">modifica</a>
+        <a class="button" th:href="@{'/admin/training/delete/' + ${training.id}}">elimina</a>
+    </div>
+</div>
+</body>
+</html>
