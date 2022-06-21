@@ -100,7 +100,7 @@ public class PersonalTrainerController {
         return oldTrainer.getPhoto();
     }
 
-    public String getUploadDir(PersonalTrainer trainer){
+    public static String getUploadDir(PersonalTrainer trainer){
         return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
     }
 }

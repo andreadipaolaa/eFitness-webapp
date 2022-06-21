@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+  th:replace="fragments/base.html :: headerfiles(title='eFitness-studio', css='/css/user/list.css')">
+</head>
+<body>
+    <header th:replace="fragments/base.html :: intestazione"></header>
+    <div th:if="${trainers}">
+        <h1 class="title">Our Personal Trainers</h1>
+        <div class="cards">
+            <div th:each="trainer : ${trainers}" class="card">
+                <img class="card-image" th:src="'/images/personalTrainer/'+${trainer.name}+${trainer.surname}+'/'+${trainer.photo}">
+                <h3 th:text="${trainer.name} + ' ' + ${trainer.surname}">nome e cognome</h3>
+                <a th:href="@{'/user/trainer/' + ${trainer.id}}" class="button">read more</a>
+            </div>
+        </div>
+    </div>
+    <div th:unless="${trainers}">
+        <h1 class="title">Sorry, there are currently no trainers :( </h1>
+    </div>
+
+    <footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

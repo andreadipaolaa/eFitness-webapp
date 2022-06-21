@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+        th:replace="fragments/base.html :: headerfiles(title='Trainer Details', css='/css/user/detail.css')">
+</head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div class="singleton">
+  <img th:if="${trainer.photo != null}"
+       th:src="@{${directory}  + '/' + ${trainer.photo}}"></img>
+  <div class="info">
+    <h1 th:text="${trainer.name} + ' ' + ${trainer.surname}">Paolo Rossi</h1>
+   <p th:text="${trainer.description}">
+     Description
+   </p>
+    <p th:text="#{trainer.detail.courses}">Courses:</p>
+    <ul>
+      <li th:each="course : ${trainer.courses}">
+        <a class="rif" th:href="@{'/user/course' + '/' + ${course.id}}"
+           th:text="${course.name}">Zumba </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>
