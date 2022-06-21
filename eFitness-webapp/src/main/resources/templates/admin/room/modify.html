@@ -3,7 +3,7 @@
 <head th:replace="fragments/admin-base.html :: headerfiles(title=#{room.modify}, css='/css/admin/admin.css')"></head>
 <body>
 <header th:replace="fragments/admin-base.html :: header(#{room.modify})"></header>
-<form class="form" th:action="@{/admin/room/modify}" method="post" th:object="${room}" enctype="multipart/form-data">
+<form class="form" th:action="@{'/admin/room/modify/' + ${room.id}}" method="post" th:object="${room}" enctype="multipart/form-data">
     <div>
         <div th:text="#{infos}">infos</div>
         <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />

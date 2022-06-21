@@ -1,3 +1,5 @@
+:root { --main-color: forestgreen; }
+
 html {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
@@ -6,7 +8,7 @@ html {
 }
 
 .nav-bar {
-    border-bottom: 0.1rem solid #6d5dfc;
+    border-bottom: 0.2rem solid var(--main-color);
     padding-bottom: 0.2rem;
     height: 2rem;
     top: 0;
@@ -17,7 +19,7 @@ html {
 }
 
 /* BUTTONS */
-.button, .button2 {
+.button, .button2, .logout{
     width: fit-content;
     margin: 0.3rem;
     border-radius: 0.8rem;
@@ -38,30 +40,26 @@ html {
     color: #9baacf;
 }
 
-.button:hover { color: #6d5dfc; }
+.button:hover { color: var(--main-color); }
 
 .button:active { box-shadow: inset .2rem .2rem .5rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF; }
 
 .button2 {
+    height: 1.5rem;
     border: none;
-    background: #5b0eeb;
-    box-shadow: inset .1rem .1rem .5rem #8abdff, inset -.1rem -.1rem .5rem #5b0eeb,
+    background: var(--main-color);
+    box-shadow: inset .1rem .1rem .5rem lightgreen, inset -.1rem -.1rem .5rem var(--main-color),
     .1rem .1rem .2rem #c8d0e7, -.1rem -.1rem .2rem white;
     color: #E4EBF5;
 }
 
 .button2:hover { color: white; }
 
-.button2:active {
-    box-shadow:inset .2rem .2rem 1rem #5b0eeb,
-    inset -.2rem -.2rem 1rem #8abdff;
-}
+.button2:active { box-shadow:inset .2rem .2rem 1rem var(--main-color), inset -.2rem -.2rem 1rem lightgreen; }
 
 .home {
-    color: #6d5dfc;
+    color: var(--main-color);
     transition: .3s ease;
 }
 
-.home:active {
-    color: #461fa1;
-}
+.home:active { color: darkgreen; }

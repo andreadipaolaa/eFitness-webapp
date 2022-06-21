@@ -28,6 +28,12 @@
         </div>
     </div>
 
+    <label for="room" th:text="#{room.choose}">Choose room:</label>
+    <ion-icon class="arrow" name="chevron-down-outline"></ion-icon>
+    <select name="room" id="room">
+        <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}">room</option>
+    </select>
+
     <span th:text="#{photo.choose}">Choose photo:</span>
     <div>
         <button class="file_upload" type="button">

@@ -34,8 +34,7 @@ public class TrainingTypeController {
         this.trainingTypeValidator.validate(trainingType, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.trainingTypeService.save(trainingType);
-            model.addAttribute("trainings", this.trainingTypeService.getAll());
-            return "admin/training/list";
+            return getTrainingTypes(model);
         }
         return "admin/training/form";
     }
@@ -48,11 +47,11 @@ public class TrainingTypeController {
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
     public String modifyTrainingType(@PathVariable("id") Long id, @ModelAttribute("training") TrainingType trainingType,
-                                     BindingResult bindingResult){
+                                     BindingResult bindingResult, Model model){
         this.trainingTypeValidator.validate(trainingType, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.trainingTypeService.modifyById(id, trainingType);
-            return "admin/course/list";
+            return getTrainingTypes(model);
         }
         return "admin/training/modify";
     }

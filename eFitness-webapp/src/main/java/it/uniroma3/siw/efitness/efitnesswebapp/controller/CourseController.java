@@ -2,9 +2,11 @@ package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
+import it.uniroma3.siw.efitness.efitnesswebapp.model.Room;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.TrainingType;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.RoomService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.TrainingTypeService;
 import it.uniroma3.siw.efitness.efitnesswebapp.util.FileManager;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.CourseValidator;
@@ -25,6 +27,8 @@ public class CourseController {
 
     @Autowired private TrainingTypeService trainingTypeService;
 
+    @Autowired private RoomService roomService;
+
     @Autowired private CourseValidator courseValidator;
 
     public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/course/";
@@ -40,17 +44,21 @@ public class CourseController {
         model.addAttribute("course", new Course());
         model.addAttribute("trainers", this.personalTrainerService.getAll());
         model.addAttribute("trainings", this.trainingTypeService.getAll());
+        model.addAttribute("rooms", this.roomService.getAll());
         return "admin/course/form";
     }
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
     public String addCourse(@ModelAttribute("course") Course course, @RequestParam("image") MultipartFile multipartFile,
                             @RequestParam("trainer") Long idTrainer, @RequestParam("training") Long idTraining,
-                            Model model, BindingResult bindingResult) {
+                            @RequestParam("room") Long idRoom, Model model, BindingResult bindingResult) {
         PersonalTrainer trainer = personalTrainerService.getPersonalTrainerById(idTrainer);
         TrainingType training = trainingTypeService.getTrainingTypeById(idTraining);
+        Room room = roomService.getRoomById(idRoom);
+
         course.setPersonalTrainer(trainer);
         course.setTrainingType(training);
+        course.setRoom(room);
         this.courseValidator.validate(course, bindingResult);
         if(!bindingResult.hasErrors()) {
             if(!multipartFile.isEmpty())
@@ -78,27 +86,34 @@ public class CourseController {
         model.addAttribute("course", this.courseService.getCourseById(idCourse));
         model.addAttribute("trainers", this.personalTrainerService.getAll());
         model.addAttribute("trainings", this.trainingTypeService.getAll());
+        model.addAttribute("rooms", this.roomService.getAll());
         return "admin/course/modify";
     }
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
     public String modifyCourse(@PathVariable("id") Long idCourse, @ModelAttribute("course") Course course, Model model,
                                @RequestParam("trainer") Long idTrainer, @RequestParam("training") Long idTraining,
-                               @RequestParam("image")MultipartFile multipartFile, BindingResult bindingResult){
+                               @RequestParam("image")MultipartFile multipartFile, BindingResult bindingResult,
+                               @RequestParam("room") Long idRoom){
         Course oldCourse = this.courseService.getCourseById(idCourse);
         if(!oldCourse.getName().equals(course.getName()))
             this.courseValidator.validate(course,bindingResult);
         if(!bindingResult.hasErrors()) {
             PersonalTrainer trainer = personalTrainerService.getPersonalTrainerById(idTrainer);
             TrainingType training = trainingTypeService.getTrainingTypeById(idTraining);
+            Room room = roomService.getRoomById(idRoom);
+
             course.setPersonalTrainer(trainer);
             course.setTrainingType(training);
-            course.setPhoto(modifyPhoto(multipartFile, idCourse, course));
+            course.setRoom(room);
+            if(!multipartFile.isEmpty())
+                course.setPhoto(modifyPhoto(multipartFile, idCourse, course));
             this.courseService.modifyById(idCourse, course);
             return getCourses(model);
         }
         model.addAttribute("trainers", this.personalTrainerService.getAll());
         model.addAttribute("trainings", this.trainingTypeService.getAll());
+        model.addAttribute("rooms", this.roomService.getAll());
         return "admin/course/modify";
     }
 
