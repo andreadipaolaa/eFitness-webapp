@@ -1,5 +1,6 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
+import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
@@ -34,7 +35,7 @@ public class MainController {
     @RequestMapping(value = {"trainers"}, method = RequestMethod.GET)
     public String getTrainers(Model model){
         model.addAttribute("trainers", this.personalTrainerService.getAll());
-        return "user/trainer-list.html";
+        return "user/trainer/trainer-list.html";
     }
 
     @RequestMapping(value={"trainer/{id}"}, method = RequestMethod.GET)
@@ -43,6 +44,14 @@ public class MainController {
         model.addAttribute("trainer", trainer);
         model.addAttribute("directory", PersonalTrainerController.getUploadDir(trainer));
         return "user/trainer/detailTrainer";
+    }
+
+    @RequestMapping(value = {"course/{id}"}, method = RequestMethod.GET)
+    public String getCourse(@PathVariable("id") Long idCourse, Model model){
+        Course course = this.courseService.getCourseById(idCourse);
+        model.addAttribute("course", course);
+        model.addAttribute("directory", CourseController.getUploadDir(course));
+        return "user/course/detailCourse";
     }
 
 }
