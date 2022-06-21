@@ -1,3 +1,7 @@
+body{
+    background-color: honeydew;
+}
+
 .title{
     text-align: center;
 }
@@ -26,21 +30,20 @@
 }
 
 .card-image {
-    border-bottom: 0.1rem solid limegreen;
-    width: 3rem;
-    font-size: 3rem;
     aspect-ratio: 1;
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.3rem;
+    margin: 0.7rem;
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
 }
 
 .button {
-    background-color: #6d5dfc;
+    background-color: #00415d;
     color: #fff;
     border:none;
     border-radius:10px;
     padding: 10px;
-    margin: 20px;
+    margin-bottom: 20px;
     text-decoration: none;
     font-weight: bold;
 }
