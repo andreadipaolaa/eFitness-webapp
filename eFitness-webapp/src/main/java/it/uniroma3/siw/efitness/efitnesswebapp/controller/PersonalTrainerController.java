@@ -73,12 +73,13 @@ public class PersonalTrainerController {
 
     @RequestMapping(value ={"modify/{id}"}, method = RequestMethod.POST)
     public String modifyTrainer(@Valid @ModelAttribute("trainer") PersonalTrainer trainer, @RequestParam("image")MultipartFile multipartFile,
-                                @PathVariable("id") Long idTrainer, BindingResult bindingResult ){
+                                @PathVariable("id") Long idTrainer, BindingResult bindingResult, Model model){
         this.personalTrainerValidator.validate(trainer,bindingResult);
         if(!bindingResult.hasErrors()) {
-            trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
+            if (!multipartFile.isEmpty())
+                trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
             this.personalTrainerService.modifyById(idTrainer, trainer);
-            return "admin/trainer/list";
+            return getTrainers(model);
         }
         return "admin/trainer-modify-form";
     }

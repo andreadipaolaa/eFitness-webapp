@@ -66,13 +66,14 @@ public class RoomController {
     }
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
-    public String modifyRoom(@PathVariable("id") Long idRoom, @ModelAttribute("course") Room room,
-                             @RequestParam("image")MultipartFile multipartFile, Model model, BindingResult bindingResult){
+    public String modifyRoom(@PathVariable("id") Long idRoom, @ModelAttribute("room") Room room, Model model,
+                             @RequestParam("image")MultipartFile multipartFile, BindingResult bindingResult){
         this.roomValidator.validate(room,bindingResult);
         if(!bindingResult.hasErrors()) {
-            room.setPhoto(modifyPhoto(multipartFile, idRoom, room));
+            if (!multipartFile.isEmpty())
+                room.setPhoto(modifyPhoto(multipartFile, idRoom, room));
             this.roomService.modifyById(idRoom, room);
-            return "admin/room/list";
+            return getRooms(model);
         }
         return "admin/room/modify";
     }
