@@ -2,6 +2,10 @@ body{
     background-color: honeydew;
 }
 
+h3{
+    margin: 0.8rem;
+}
+
 .title{
     text-align: center;
 }
@@ -35,6 +39,7 @@ body{
     width: 200px;
     height: auto;
     border-radius: 50%;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button {
