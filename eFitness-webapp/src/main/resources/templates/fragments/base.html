@@ -24,11 +24,11 @@
     </div>
 
     <div class="nav-links">
-      <a th:href="@{/user/home}">Home</a>
-      <a th:href="@{/user/trainers}" >I nostri trainer</a>
-      <a th:href="@{/user/courses}">I nostri corsi</a>
-      <a th:href="@{/user/rooms}">Le nostre sale</a>
-      <a th:href="@{/}">Area Personale</a>
+      <a th:href="@{/user/home}" th:text="#{nav.home}">Home</a>
+      <a th:href="@{/user/trainers}" th:text="#{nav.trainers}">I nostri trainer</a>
+      <a th:href="@{/user/courses}" th:text="#{nav.courses}">I nostri corsi</a>
+      <a th:href="@{/user/rooms}" th:text="#{nav.rooms}">Le nostre sale</a>
+      <a th:href="@{/}" th:text="#{nav.personal}">Area Personale</a>
     </div>
   </div>
 </nav>

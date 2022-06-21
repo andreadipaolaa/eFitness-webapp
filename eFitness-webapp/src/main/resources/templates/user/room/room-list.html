@@ -11,7 +11,7 @@
         <div th:each="room : ${rooms}" class="card">
             <img class="card-image" th:src="'/images/room/' + ${room.name}+ '/' +${room.photo}">
             <h3 th:text="${room.name}">nome</h3>
-            <a th:href="@{'/user/course/' + ${room.id}}" class="button">read more</a>
+            <a th:href="@{'/user/room/' + ${room.id}}" class="button">read more</a>
         </div>
     </div>
 </div>

@@ -52,7 +52,6 @@ public class MainController {
     public String getTrainer(@PathVariable("id") Long idTrainer, Model model){
         PersonalTrainer trainer = this.personalTrainerService.getPersonalTrainerById(idTrainer);
         model.addAttribute("trainer", trainer);
-        model.addAttribute("directory", PersonalTrainerController.getUploadDir(trainer));
         return "user/trainer/detailTrainer";
     }
 
@@ -60,8 +59,15 @@ public class MainController {
     public String getCourse(@PathVariable("id") Long idCourse, Model model){
         Course course = this.courseService.getCourseById(idCourse);
         model.addAttribute("course", course);
-        model.addAttribute("directory", CourseController.getUploadDir(course));
         return "user/course/detailCourse";
     }
+
+    @RequestMapping(value = {"room/{id}"}, method = RequestMethod.GET)
+    public String getRoom(@PathVariable("id") Long idRoom, Model model){
+        model.addAttribute("room", this.roomService.getRoomById(idRoom));
+        return "user/room/detailRoom";
+    }
+
+
 
 }

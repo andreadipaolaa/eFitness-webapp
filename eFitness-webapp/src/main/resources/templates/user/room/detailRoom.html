@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+        th:replace="fragments/base.html :: headerfiles(title='Room Details', css='/css/user/detail.css')">
+</head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div class="singleton">
+  <img th:if="${room.photo != null}"
+       th:src="'/images/room/'+${room.name}+'/'+${room.photo}"></img>
+  <div class="info">
+    <h1 th:text="${room.name}">Paolo Rossi</h1>
+    <p th:text="${room.description}">
+      Description
+    </p>
+  </div>
+</div>
+
+<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

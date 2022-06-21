@@ -80,7 +80,7 @@ public class RoomController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = getUploadDir(room);
         FileManager.store(multipartFile, uploadDir);
-        return fileName;
+        return getDirectoryName(room) + "/" + fileName;
     }
 
     public String modifyPhoto(MultipartFile multipartFile, Long id, Room newRoom){
@@ -90,10 +90,12 @@ public class RoomController {
             return savePhoto(multipartFile, newRoom);
         }
         FileManager.dirChangeName(getUploadDir(oldRoom), getUploadDir(newRoom));
-        return oldRoom.getPhoto();
+        return getDirectoryName(newRoom) + "/" + oldRoom.getPhoto();
     }
 
     public String getUploadDir(Room room){
-        return DIR + room.getName().replaceAll("\\s", "");
+        return DIR + getDirectoryName(room);
     }
+
+    public String getDirectoryName(Room room){ return room.getName().replaceAll("\\s", ""); }
 }
