@@ -69,6 +69,7 @@ public class CourseController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteCourseConfirmed(@PathVariable("id")Long id, Model model){
+        FileManager.dirEmptyEndDelete(getUploadDir(this.courseService.getCourseById(id)));
         this.courseService.deleteById(id);
         return getCourses(model);
     }
@@ -112,7 +113,7 @@ public class CourseController {
     public String modifyPhoto(MultipartFile multipartFile, Long id, Course newCourse){
         Course oldCourse = this.courseService.getCourseById(id);
         if(! multipartFile.isEmpty()){
-            FileManager.removeImgAndDir(getUploadDir(oldCourse), oldCourse.getPhoto());
+            FileManager.dirEmptyEndDelete(getUploadDir(oldCourse));
             return savePhoto(multipartFile, newCourse);
         }
         FileManager.dirChangeName(getUploadDir(oldCourse), getUploadDir(newCourse));

@@ -7,7 +7,7 @@
 <header th:replace="fragments/base.html :: intestazione"></header>
 <div class="singleton">
   <img th:if="${trainer.photo != null}"
-       th:src="'/images/personalTrainer/'+${trainer.name}+${trainer.surname}+'/'+${trainer.photo}"></img>
+       th:src="'/images/personalTrainer/' +${trainer.photo}"></img>
   <div class="info">
     <h1 th:text="${trainer.name} + ' ' + ${trainer.surname}">Paolo Rossi</h1>
    <p th:text="${trainer.description}">

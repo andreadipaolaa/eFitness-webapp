@@ -60,6 +60,7 @@ public class PersonalTrainerController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteTrainerConfirmed(@PathVariable("id")Long id, Model model){
+        FileManager.dirEmptyEndDelete(getUploadDir(this.personalTrainerService.getPersonalTrainerById(id)));
         this.personalTrainerService.deleteById(id);
         return getTrainers(model);
     }
@@ -92,7 +93,7 @@ public class PersonalTrainerController {
     public String modifyPhoto(MultipartFile multipartFile, Long id, PersonalTrainer newTrainer){
         PersonalTrainer oldTrainer = this.personalTrainerService.getPersonalTrainerById(id);
         if(! multipartFile.isEmpty()){
-            FileManager.removeImgAndDir(getUploadDir(oldTrainer), oldTrainer.getPhoto());
+            FileManager.dirEmptyEndDelete(getUploadDir(oldTrainer));
             return savePhoto(multipartFile, newTrainer);
         }
         FileManager.dirChangeName(getUploadDir(oldTrainer), getUploadDir(newTrainer));

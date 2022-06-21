@@ -54,6 +54,7 @@ public class RoomController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteRoomConfirmed(@PathVariable("id")Long id, Model model){
+        FileManager.dirEmptyEndDelete(getUploadDir(this.roomService.getRoomById(id)));
         this.roomService.deleteById(id);
         return getRooms(model);
     }
@@ -86,7 +87,7 @@ public class RoomController {
     public String modifyPhoto(MultipartFile multipartFile, Long id, Room newRoom){
         Room oldRoom = this.roomService.getRoomById(id);
         if(! multipartFile.isEmpty()){
-            FileManager.removeImgAndDir(getUploadDir(oldRoom), oldRoom.getPhoto());
+            FileManager.dirEmptyEndDelete(getUploadDir(oldRoom));
             return savePhoto(multipartFile, newRoom);
         }
         FileManager.dirChangeName(getUploadDir(oldRoom), getUploadDir(newRoom));
