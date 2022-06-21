@@ -1,6 +1,5 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
-import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Room;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +44,6 @@ public class RoomService {
 
     public boolean AlreadyExists(Room room){
        List<Room> rooms= this.roomRepository.findByName(room.getName());
-       if (rooms.size() >0)
-           return true;
-       else
-           return false;
+       return (rooms.size() >0);
     }
-
-
 }

@@ -1,4 +1,3 @@
-
 package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
@@ -16,20 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
-@RequestMapping("admin/trainer/")
+@Controller @RequestMapping("admin/trainer/")
 public class PersonalTrainerController {
 
     @Autowired
     private PersonalTrainerService personalTrainerService;
 
-
     @Autowired
     private PersonalTrainerValidator personalTrainerValidator;
 
-
     public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/personalTrainer/";
-
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String getTrainers(Model model) {
@@ -60,7 +55,7 @@ public class PersonalTrainerController {
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
     public String deleteTrainer(@PathVariable("id")Long id, Model model){
         model.addAttribute("trainer", this.personalTrainerService.getPersonalTrainerById(id));
-        return "confirmDeleteTrainer";
+        return "admin/trainer/confirm-delete";
     }
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
@@ -77,15 +72,14 @@ public class PersonalTrainerController {
 
     @RequestMapping(value ={"modify/{id}"}, method = RequestMethod.POST)
     public String modifyTrainer(@Valid @ModelAttribute("trainer") PersonalTrainer trainer, @RequestParam("image")MultipartFile multipartFile,
-                                @PathVariable("id") Long idTrainer, Model model, BindingResult bindingResult ){
+                                @PathVariable("id") Long idTrainer, BindingResult bindingResult ){
         this.personalTrainerValidator.validate(trainer,bindingResult);
         if(!bindingResult.hasErrors()) {
             trainer.setPhoto(modifyPhoto(multipartFile, idTrainer, trainer));
             this.personalTrainerService.modifyById(idTrainer, trainer);
             return "admin/trainer/list";
         }
-        else
-            return "admin/trainer-modify-form";
+        return "admin/trainer-modify-form";
     }
 
     public String savePhoto(MultipartFile multipartFile, PersonalTrainer trainer){
@@ -101,10 +95,8 @@ public class PersonalTrainerController {
             FileManager.removeImgAndDir(getUploadDir(oldTrainer), oldTrainer.getPhoto());
             return savePhoto(multipartFile, newTrainer);
         }
-        else{
-            FileManager.dirChangeName(getUploadDir(oldTrainer), getUploadDir(newTrainer));
-            return oldTrainer.getPhoto();
-        }
+        FileManager.dirChangeName(getUploadDir(oldTrainer), getUploadDir(newTrainer));
+        return oldTrainer.getPhoto();
     }
 
     public String getUploadDir(PersonalTrainer trainer){

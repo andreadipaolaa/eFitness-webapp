@@ -1,7 +1,5 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
-import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
-import it.uniroma3.siw.efitness.efitnesswebapp.model.Room;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.TrainingType;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.TrainingTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +40,8 @@ public class TrainingTypeService {
         save(toModify);
     }
 
-
     public boolean AlreadyExists(TrainingType trainingType){
         List<TrainingType> trainingTypes= this.trainingTypeRepository.findByName(trainingType.getName());
-        if (trainingTypes.size() >0)
-            return true;
-        else
-            return false;
+        return (trainingTypes.size() >0);
     }
 }

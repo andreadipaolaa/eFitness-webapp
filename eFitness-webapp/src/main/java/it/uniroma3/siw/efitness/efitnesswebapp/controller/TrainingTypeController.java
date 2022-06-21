@@ -48,20 +48,19 @@ public class TrainingTypeController {
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
     public String modifyTrainingType(@PathVariable("id") Long id, @ModelAttribute("training") TrainingType trainingType,
-                                     BindingResult bindingResult, Model model){
+                                     BindingResult bindingResult){
         this.trainingTypeValidator.validate(trainingType, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.trainingTypeService.modifyById(id, trainingType);
             return "admin/course/list";
         }
-        else
-            return "admin/training/modify";
+        return "admin/training/modify";
     }
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
     public String deleteTrainingType(@PathVariable("id")Long id, Model model){
         model.addAttribute("training", this.trainingTypeService.getTrainingTypeById(id));
-        return "admin/training/confirmDelete";
+        return "admin/training/confirm-delete";
     }
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)

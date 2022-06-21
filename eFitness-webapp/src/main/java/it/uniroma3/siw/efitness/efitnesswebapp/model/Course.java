@@ -31,7 +31,7 @@ public class Course {
     @ManyToMany (mappedBy = "courses")
     private List<User> users;
 
-    @OneToOne
+    @ManyToOne
     private Room room;
 
     private String photo;
