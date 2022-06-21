@@ -60,6 +60,7 @@ public class PersonalTrainerController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteTrainerConfirmed(@PathVariable("id")Long id, Model model){
+        FileManager.dirEmptyEndDelete(getUploadDir(this.personalTrainerService.getPersonalTrainerById(id)));
         this.personalTrainerService.deleteById(id);
         return getTrainers(model);
     }
@@ -87,20 +88,24 @@ public class PersonalTrainerController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = getUploadDir(trainer);
         FileManager.store(multipartFile, uploadDir);
-        return fileName;
+        return getDirectoryName(trainer) + "/" + fileName;
     }
 
     public String modifyPhoto(MultipartFile multipartFile, Long id, PersonalTrainer newTrainer){
         PersonalTrainer oldTrainer = this.personalTrainerService.getPersonalTrainerById(id);
         if(! multipartFile.isEmpty()){
-            FileManager.removeImgAndDir(getUploadDir(oldTrainer), oldTrainer.getPhoto());
+            FileManager.dirEmptyEndDelete(getUploadDir(oldTrainer));
             return savePhoto(multipartFile, newTrainer);
         }
         FileManager.dirChangeName(getUploadDir(oldTrainer), getUploadDir(newTrainer));
-        return oldTrainer.getPhoto();
+        return getDirectoryName(newTrainer) + "/" + oldTrainer.getPhoto();
     }
 
-    public static String getUploadDir(PersonalTrainer trainer){
-        return DIR + trainer.getName().replaceAll("\\s", "") + trainer.getSurname().replaceAll("\\s", "");
+    public String getUploadDir(PersonalTrainer trainer){
+        return DIR + getDirectoryName(trainer);
+    }
+
+    public String getDirectoryName(PersonalTrainer personalTrainer){
+        return personalTrainer.getName().replaceAll("\\s", "") + personalTrainer.getSurname().replaceAll("\\s", "");
     }
 }

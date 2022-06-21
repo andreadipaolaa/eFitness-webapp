@@ -9,7 +9,7 @@
         <h1 class="title">Our Personal Trainers</h1>
         <div class="cards">
             <div th:each="trainer : ${trainers}" class="card">
-                <img class="card-image" th:src="'/images/personalTrainer/'+${trainer.name}+${trainer.surname}+'/'+${trainer.photo}">
+                <img class="card-image" th:src="'/images/personalTrainer/'+${trainer.photo}">
                 <h3 th:text="${trainer.name} + ' ' + ${trainer.surname}">nome e cognome</h3>
                 <a th:href="@{'/user/trainer/' + ${trainer.id}}" class="button">read more</a>
             </div>

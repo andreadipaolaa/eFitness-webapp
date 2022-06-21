@@ -4,6 +4,7 @@ import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.PersonalTrainerService;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class MainController {
     @Autowired
     private PersonalTrainerService personalTrainerService;
 
+    @Autowired
+    private RoomService roomService;
+
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String getHome(Model model){
         return "index.html";
@@ -29,7 +33,13 @@ public class MainController {
     @RequestMapping(value = {"courses"}, method = RequestMethod.GET)
     public String getCourses(Model model){
         model.addAttribute("courses", this.courseService.getAll());
-        return "user/course-list.html";
+        return "user/course/course-list.html";
+    }
+
+    @RequestMapping(value = {"rooms"}, method = RequestMethod.GET)
+    public String getRooms(Model model){
+        model.addAttribute("rooms", this.roomService.getAll());
+        return "user/room/room-list.html";
     }
 
     @RequestMapping(value = {"trainers"}, method = RequestMethod.GET)
@@ -42,7 +52,6 @@ public class MainController {
     public String getTrainer(@PathVariable("id") Long idTrainer, Model model){
         PersonalTrainer trainer = this.personalTrainerService.getPersonalTrainerById(idTrainer);
         model.addAttribute("trainer", trainer);
-        model.addAttribute("directory", PersonalTrainerController.getUploadDir(trainer));
         return "user/trainer/detailTrainer";
     }
 
@@ -50,8 +59,15 @@ public class MainController {
     public String getCourse(@PathVariable("id") Long idCourse, Model model){
         Course course = this.courseService.getCourseById(idCourse);
         model.addAttribute("course", course);
-        model.addAttribute("directory", CourseController.getUploadDir(course));
         return "user/course/detailCourse";
     }
+
+    @RequestMapping(value = {"room/{id}"}, method = RequestMethod.GET)
+    public String getRoom(@PathVariable("id") Long idRoom, Model model){
+        model.addAttribute("room", this.roomService.getRoomById(idRoom));
+        return "user/room/detailRoom";
+    }
+
+
 
 }

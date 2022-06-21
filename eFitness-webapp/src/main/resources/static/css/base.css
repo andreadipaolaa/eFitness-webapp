@@ -22,12 +22,16 @@ body {
     display: inline;
 }
 
-.nav > .nav-header .logo {
+.logo {
     display: inline-block;
     /*font-size: 22px;*/
-    height: 120px;
+    height: 160px;
     width: auto;
-    padding: 10px 10px 10px 40px;
+    position: relative;
+    /*top: -38px;*/
+    /*left: -20px;*/
+    top: -2.25rem;
+    left: -0.4rem;
 }
 
 .nav > .nav-btn {
