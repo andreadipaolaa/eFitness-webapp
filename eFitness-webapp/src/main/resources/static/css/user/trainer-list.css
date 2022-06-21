@@ -1,0 +1,48 @@
+.title{
+    text-align: center;
+}
+
+.cards {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    width: 30%;
+    max-width: 31%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-style: solid;
+    border-color: limegreen;
+    border-radius: 10px;
+    margin: 20px;
+    background: rgba(50, 205, 50, 0.2);
+
+}
+
+.card-image {
+    border-bottom: 0.1rem solid limegreen;
+    width: 3rem;
+    font-size: 3rem;
+    aspect-ratio: 1;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.3rem;
+}
+
+.button {
+    background-color: #6d5dfc;
+    color: #fff;
+    border:none;
+    border-radius:10px;
+    padding: 10px;
+    margin: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 34rem) { html { font-size: 20px; } }
