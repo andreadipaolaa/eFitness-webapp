@@ -10,14 +10,14 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="principal-box login-box">
-	<header class="lb-header">
-		<span id="title">Login</span>
-	</header>
+<div class="principal-box">
+	<div id="title">Login</div>
+
 	<div class="google-login">
 		<a href="oauth2/authorization/google">login with google</a>
 	</div>
-	<form th:action="@{/login}" method="POST" class="login">
+
+	<form th:action="@{/login}" method="post">
 		<div class="u-form-group">
 			<input name="username" type="text" required placeholder="Username"/>
 		</div>
