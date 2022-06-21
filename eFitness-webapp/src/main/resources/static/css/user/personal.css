@@ -1,11 +1,10 @@
 body{
     font-size: 1.5rem;
     color: #3b3b3b;
-    background: #2b2b2b;
 }
 
 .main-bd {
-    margin: 10%;
+    margin: 5% auto;
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -20,12 +19,15 @@ body{
     width: 30vw;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0;
+    padding: 5%;
 }
 
-.right-side{
-    padding-top: 15%;
+.left-side img{
+    width:100%;
+    height: auto;
 }
+
 
 h2{
     font-size: 2rem;
@@ -49,7 +51,7 @@ h2{
 }
 .row .header{
     color: #ffffff;
-    background: forestgreen;
+    background-color: forestgreen;
 }
 
 .cell{
@@ -60,13 +62,13 @@ h2{
 button{
     text-transform: uppercase;
     font-size: 1.5rem;
-    border: forestgreen;
-    color: #333333;
+    color: #dddddd;
+    background-color: forestgreen;
 }
 
 button:hover, button:checked{
-    background-color: forestgreen;
-    color: #dddddd;
+    background-color: #dddddd;
+    color: #333333;
 }
 
 @media(max-width: 580px){

@@ -84,7 +84,7 @@ public class MainController {
         return "user/personalArea/personalArea";
     }
 
-    @RequestMapping(value={"personal/subscription"}, method = RequestMethod.GET)
+    @RequestMapping(value={"personal/subscription/add"}, method = RequestMethod.GET)
     public String subscriptionIntention(Model model){
         model.addAttribute("courses", getPotentialSubscriptions(getActiveUser()));
         return "user/personalArea/addSubscription";
@@ -98,6 +98,12 @@ public class MainController {
         this.userService.addCourse(course, user);
         model.addAttribute("user", user);
         return "user/personalArea/personalArea";
+    }
+
+    @RequestMapping(value={"personal/subscription/delete/{id}"}, method = RequestMethod.GET)
+    public String askForSubscriptionDelete(@PathVariable("id") Long idCourse, Model model){
+        model.addAttribute("course", this.courseService.getCourseById(idCourse));
+        return "user/personalArea/confirmDeleteSubscription";
     }
 
     @RequestMapping(value = {"personal/subscription/delete/{id}"}, method = RequestMethod.POST)
