@@ -29,7 +29,6 @@ public class CourseController {
 
     public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/course/";
 
-
     @RequestMapping(value={"list"}, method = RequestMethod.GET)
     public String getCourses(Model model){
         model.addAttribute("courses", this.courseService.getAll());
@@ -44,10 +43,9 @@ public class CourseController {
         return "admin/course/form";
     }
 
-
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
     public String addCourse(@ModelAttribute("course") Course course, @RequestParam("image") MultipartFile multipartFile,
-                            @RequestParam("trainer") Long idTrainer, @RequestParam("trainer") Long idTraining,
+                            @RequestParam("trainer") Long idTrainer, @RequestParam("training") Long idTraining,
                             Model model, BindingResult bindingResult) {
         PersonalTrainer trainer = personalTrainerService.getPersonalTrainerById(idTrainer);
         TrainingType training = trainingTypeService.getTrainingTypeById(idTraining);
@@ -55,7 +53,8 @@ public class CourseController {
         course.setTrainingType(training);
         this.courseValidator.validate(course, bindingResult);
         if(!bindingResult.hasErrors()) {
-            course.setPhoto(savePhoto(multipartFile, course));
+            if(!multipartFile.isEmpty())
+                course.setPhoto(savePhoto(multipartFile, course));
             courseService.save(course);
             return getCourses(model);
         }
@@ -74,26 +73,34 @@ public class CourseController {
         return getCourses(model);
     }
 
-
     @RequestMapping(value={"modify/{id}"}, method = RequestMethod.GET)
     public String modifyCourse(@PathVariable("id") Long idCourse, Model model){
         model.addAttribute("course", this.courseService.getCourseById(idCourse));
+        model.addAttribute("trainers", this.personalTrainerService.getAll());
+        model.addAttribute("trainings", this.trainingTypeService.getAll());
         return "admin/course/modify";
     }
 
     @RequestMapping(value = {"modify/{id}"}, method = RequestMethod.POST)
-    public String modifyCourse(@PathVariable("id") Long idCourse, @ModelAttribute("course") Course course,
-                               @RequestParam("image")MultipartFile multipartFile, Model model, BindingResult bindingResult){
-        this.courseValidator.validate(course,bindingResult);
+    public String modifyCourse(@PathVariable("id") Long idCourse, @ModelAttribute("course") Course course, Model model,
+                               @RequestParam("trainer") Long idTrainer, @RequestParam("training") Long idTraining,
+                               @RequestParam("image")MultipartFile multipartFile, BindingResult bindingResult){
+        Course oldCourse = this.courseService.getCourseById(idCourse);
+        if(!oldCourse.getName().equals(course.getName()))
+            this.courseValidator.validate(course,bindingResult);
         if(!bindingResult.hasErrors()) {
+            PersonalTrainer trainer = personalTrainerService.getPersonalTrainerById(idTrainer);
+            TrainingType training = trainingTypeService.getTrainingTypeById(idTraining);
+            course.setPersonalTrainer(trainer);
+            course.setTrainingType(training);
             course.setPhoto(modifyPhoto(multipartFile, idCourse, course));
             this.courseService.modifyById(idCourse, course);
-            return "admin/course/list";
+            return getCourses(model);
         }
-        else
-            return "admin/course/modify";
+        model.addAttribute("trainers", this.personalTrainerService.getAll());
+        model.addAttribute("trainings", this.trainingTypeService.getAll());
+        return "admin/course/modify";
     }
-
 
     public String savePhoto(MultipartFile multipartFile, Course course){
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -108,10 +115,8 @@ public class CourseController {
             FileManager.removeImgAndDir(getUploadDir(oldCourse), oldCourse.getPhoto());
             return savePhoto(multipartFile, newCourse);
         }
-        else{
-            FileManager.dirChangeName(getUploadDir(oldCourse), getUploadDir(newCourse));
-            return oldCourse.getPhoto();
-        }
+        FileManager.dirChangeName(getUploadDir(oldCourse), getUploadDir(newCourse));
+        return oldCourse.getPhoto();
     }
 
     public static String getUploadDir(Course course){

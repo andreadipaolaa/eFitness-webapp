@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/admin-base.html :: headerfiles(title=#{course.add}, css='/css/admin/admin.css')"></head>
+<head th:replace="fragments/admin-base.html :: headerfiles(title=#{course.modify}, css='/css/admin/admin.css')"></head>
 <body>
-<header th:replace="fragments/admin-base.html :: header(#{course.add})"></header>
-<form class="form" th:action="@{/admin/course/add}" method="POST" th:object="${course}" enctype="multipart/form-data">
+<header th:replace="fragments/admin-base.html :: header(#{course.modify})"></header>
+<form class="form" th:action="@{'/admin/course/modify/' + ${course.id}}" method="post" th:object="${course}" enctype="multipart/form-data">
     <div>
         <div th:text="#{infos}">infos</div>
         <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
@@ -13,7 +13,7 @@
     <div class="radio">
         <div th:text="#{trainer.choose}">Choose trainer</div>
         <div class="radio-element" th:each="trainer : ${trainers}">
-            <input th:id="${trainer.id}" type="radio" name="trainer" th:value="${trainer.id}" required>
+            <input th:id="${trainer.id}" type="radio" name="trainer" th:value="${trainer.id}" th:checked="${course.personalTrainer.equals(trainer)}" required>
             <label th:for="${trainer.id}"></label>
             <span th:text="${trainer.name}+ ' ' +${trainer.surname}"></span>
         </div>
@@ -22,13 +22,13 @@
     <div class="radio">
         <div th:text="#{training.choose}">Choose training</div>
         <div class="radio-element" th:each="training : ${trainings}">
-            <input th:id="${training.id}" type="radio" name="training" th:value="${training.id}" required>
+            <input th:id="${training.id}" type="radio" name="training" th:value="${training.id}" th:checked="${course.trainingType.equals(training)}" required>
             <label th:for="${training.id}"></label>
             <span th:text="${training.name}"></span>
         </div>
     </div>
 
-    <span th:text="#{photo.choose}">Choose photo:</span>
+    <span th:text="#{photo.choose}">choose photo:</span>
     <div>
         <button class="file_upload" type="button">
             <span class="btn_lbl"> <ion-icon class="cloud" name="cloud-upload-outline"></ion-icon> Browse</span>
@@ -38,7 +38,7 @@
     </div>
 
     <div>
-        <button class="button2" type="submit" th:text="#{add}">Add</button>
+        <button class="button2" type="submit" th:text="#{confirm}">confirm</button>
     </div>
 </form>
 </body>

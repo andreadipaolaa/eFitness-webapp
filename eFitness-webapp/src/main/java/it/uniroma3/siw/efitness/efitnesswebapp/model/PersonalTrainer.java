@@ -6,9 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
-@Entity
+@Getter @Setter @Entity
 @Table(name = "personal_trainer")
 public class PersonalTrainer {
     @Id
@@ -23,7 +21,7 @@ public class PersonalTrainer {
     @Column(length=2500)
     private String description;
 
-    @OneToMany(mappedBy = "personalTrainer")
+    @OneToMany(mappedBy = "personalTrainer", cascade = CascadeType.REMOVE)
     private List<Course> courses;
 
     private String photo;

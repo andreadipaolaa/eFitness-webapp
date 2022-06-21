@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/admin-base.html :: headerfiles(title=#{title.course.list}, css='/css/admin/admin.css')"></head>
+<head  th:replace="fragments/admin-base.html :: headerfiles(title=#{course.list}, css='/css/admin/admin.css')"></head>
 <body>
-<header th:replace="fragments/admin-base.html :: header(#{header.course.list})"></header>
+<header th:replace="fragments/admin-base.html :: header(#{course.list})"></header>
 <div class="list-element" th:each="course : ${courses}">
     <div th:text="${course.name}">Ginnastica</div>
     <div class="buttons">

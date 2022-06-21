@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/admin-base.html :: headerfiles(title='Admin Home', css='/css/admin/home.css')">
+<head th:replace="fragments/admin-base.html :: headerfiles(title='Admin', css='/css/admin/home.css')">
 </head>
 <body>
-<header th:replace="fragments/admin-base.html :: header('prova')"></header>
+<header th:replace="fragments/admin-base.html :: header(#{header.admin})"></header>
 <div class="cards">
     <div class="card">
         <ion-icon class="card-image" name="happy-outline"></ion-icon>
-        <a class="button" th:href="@{/admin/trainer/list}" th:text="#{trainer.list}">Trainer List</a>
-        <a class="button" th:href="@{/admin/trainer/add}" th:text="#{trainer.add}">Add Trainer</a>
+        <a class="button" th:href="@{/admin/trainer/list}" th:text="#{trainers}">Trainers</a>
+        <a class="button" th:href="@{/admin/trainer/add}" th:text="#{add}">Add</a>
     </div>
 
     <div class="card">
         <ion-icon class="card-image" name="barbell-outline"></ion-icon>
-        <a class="button" th:href="@{/admin/course/list}" >Courses</a>
-        <a class="button" th:href="@{/admin/course/add}" >Add</a>
+        <a class="button" th:href="@{/admin/course/list}" th:text="#{courses}">Courses</a>
+        <a class="button" th:href="@{/admin/course/add}" th:text="#{add}">Add</a>
     </div>
 
     <div class="card">
         <ion-icon class="card-image" name="analytics-outline"></ion-icon>
-        <a class="button" th:href="@{/admin/training/list}" >Training Types</a>
-        <a class="button" th:href="@{/admin/training/add}" >Add</a>
+        <a class="button" th:href="@{/admin/training/list}" th:text="#{trainings}">Training Types</a>
+        <a class="button" th:href="@{/admin/training/add}" th:text="#{add}">Add</a>
     </div>
 
     <div class="card">
         <ion-icon class="card-image" name="home-outline"></ion-icon>
-        <a class="button" th:href="@{/admin/room/list}" >Rooms</a>
-        <a class="button" th:href="@{/admin/room/add}" >Add</a>
+        <a class="button" th:href="@{/admin/room/list}" th:text="#{rooms}">Rooms</a>
+        <a class="button" th:href="@{/admin/room/add}" th:text="#{add}">Add</a>
     </div>
 </div>
 </body>

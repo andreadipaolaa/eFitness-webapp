@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/admin-base.html :: headerfiles(title=#{title.training.list}, css='/css/admin/admin.css')"></head>
+<head  th:replace="fragments/admin-base.html :: headerfiles(title=#{room.list}, css='/css/admin/admin.css')"></head>
 <body>
-<header th:replace="fragments/admin-base.html :: header(#{header.training.list})"></header>
-<div class="list-element" th:each="training : ${trainings}">
-    <div th:text="${training.name}">Cardio</div>
+<header th:replace="fragments/admin-base.html :: header(#{room.list})"></header>
+<div class="list-element" th:each="room : ${rooms}">
+    <div th:text="${room.name}">Room</div>
     <div class="buttons">
-        <a class="button" th:href="@{'/admin/training/modify/' + ${training.id}}">modifica</a>
-        <a class="button" th:href="@{'/admin/training/delete/' + ${training.id}}">elimina</a>
+        <a class="button" th:href="@{'/admin/room/modify/' + ${room.id}}" th:text="#{modify}">modify</a>
+        <a class="button" th:href="@{'/admin/room/delete/' + ${room.id}}" th:text="#{delete}">delete</a>
     </div>
 </div>
 </body>

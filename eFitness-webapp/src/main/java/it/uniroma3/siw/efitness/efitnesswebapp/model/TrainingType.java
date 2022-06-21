@@ -11,14 +11,13 @@ import java.util.List;
 @Entity
 @Table(name = "training_type")
 public class TrainingType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "trainingType")
+    @OneToMany(mappedBy = "trainingType", cascade = CascadeType.REMOVE)
     private List<Course> courses;
 
 }

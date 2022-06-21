@@ -1,6 +1,5 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
-
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.PersonalTrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +45,6 @@ public class PersonalTrainerService {
 
     public boolean alreadyExists(PersonalTrainer personalTrainer){
         List<PersonalTrainer> personalTrainers= this.personalTrainerRepository.findByNameAndSurname(personalTrainer.getName(), personalTrainer.getSurname());
-        if (personalTrainers.size() >0)
-            return true;
-        else
-            return false;
+        return (personalTrainers.size() >0);
     }
 }

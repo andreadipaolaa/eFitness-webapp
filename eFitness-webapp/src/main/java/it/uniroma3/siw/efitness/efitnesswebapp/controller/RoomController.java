@@ -34,10 +34,12 @@ public class RoomController {
     }
 
     @RequestMapping(value = { "add" }, method = RequestMethod.POST)
-    public String addRoom(@ModelAttribute("room") Room room, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) {
+    public String addRoom(@ModelAttribute("room") Room room, @RequestParam("image") MultipartFile multipartFile,
+                          BindingResult bindingResult, Model model) {
         this.roomValidator.validate(room, bindingResult);
         if(!bindingResult.hasErrors()) {
-            room.setPhoto(savePhoto(multipartFile, room));
+            if (!multipartFile.isEmpty())
+                room.setPhoto(savePhoto(multipartFile, room));
             roomService.save(room);
             return getRooms(model);
         }
@@ -47,7 +49,7 @@ public class RoomController {
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.GET)
     public String deleteRoom(@PathVariable("id")Long id, Model model){
         model.addAttribute("room", this.roomService.getRoomById(id));
-        return "confirmDeleteRoom";
+        return "admin/room/confirm-delete";
     }
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
@@ -55,7 +57,6 @@ public class RoomController {
         this.roomService.deleteById(id);
         return getRooms(model);
     }
-
 
     @RequestMapping(value={"modify/{id}"}, method = RequestMethod.GET)
     public String modifyRoom(@PathVariable("id") Long idRoom, Model model){
