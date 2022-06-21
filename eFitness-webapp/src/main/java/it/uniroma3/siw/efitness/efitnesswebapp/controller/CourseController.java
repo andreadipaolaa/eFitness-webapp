@@ -119,7 +119,7 @@ public class CourseController {
         return oldCourse.getPhoto();
     }
 
-    public String getUploadDir(Course course){
+    public static String getUploadDir(Course course){
         return DIR + course.getName().replaceAll("\\s", "");
     }
 }

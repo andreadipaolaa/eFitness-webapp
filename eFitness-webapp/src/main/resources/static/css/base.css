@@ -57,6 +57,9 @@ body {
 }
 
 @media (max-width:600px) {
+    .nav{
+        z-index: 30;
+    }
     .nav > .nav-btn {
         display: inline-block;
         position: absolute;
@@ -92,6 +95,7 @@ body {
     .nav > .nav-links > a {
         display: block;
         width: 100%;
+        color: #dddddd;
     }
     .nav > #nav-check:not(:checked) ~ .nav-links {
         height: 0px;
