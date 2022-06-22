@@ -5,6 +5,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0px;
 }
 
@@ -115,6 +118,9 @@ body {
 
 
 /* CSS PER FOOTER */
+footer {
+    margin-top: auto;
+}
 footer .container{
     background-color:#333333;
     width: 100%;
