@@ -45,7 +45,8 @@ public class PersonalTrainerController {
                              BindingResult bindingResult) {
         this.personalTrainerValidator.validate(trainer, bindingResult);
         if(!bindingResult.hasErrors()) {
-            trainer.setPhoto(savePhoto(multipartFile, trainer));
+            if(! multipartFile.isEmpty())
+                trainer.setPhoto(savePhoto(multipartFile, trainer));
             this.personalTrainerService.save(trainer);
             return getTrainers(model);
         }
@@ -60,7 +61,8 @@ public class PersonalTrainerController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteTrainerConfirmed(@PathVariable("id")Long id, Model model){
-        FileManager.dirEmptyEndDelete(getUploadDir(this.personalTrainerService.getPersonalTrainerById(id)));
+        if(! (this.personalTrainerService.getPersonalTrainerById(id).getPhoto()==null))
+            FileManager.dirEmptyEndDelete(getUploadDir(this.personalTrainerService.getPersonalTrainerById(id)));
         this.personalTrainerService.deleteById(id);
         return getTrainers(model);
     }
