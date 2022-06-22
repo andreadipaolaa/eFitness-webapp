@@ -6,9 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Setter
-@Getter
-@Entity
+@Setter @Getter @Entity
 @Table(name = "course")
 public class Course {
     @Id
@@ -37,5 +35,4 @@ public class Course {
     private String photo;
 
     private int maxSubscriptions;
-
 }
