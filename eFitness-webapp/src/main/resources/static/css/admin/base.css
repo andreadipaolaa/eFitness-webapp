@@ -58,6 +58,7 @@ html {
 .button2:active { box-shadow:inset .2rem .2rem 1rem var(--main-color), inset -.2rem -.2rem 1rem lightgreen; }
 
 .home {
+    font-size: 1.3rem;
     color: var(--main-color);
     transition: .3s ease;
 }
