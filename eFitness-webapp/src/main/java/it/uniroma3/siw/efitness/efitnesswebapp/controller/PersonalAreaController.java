@@ -7,8 +7,10 @@ import it.uniroma3.siw.efitness.efitnesswebapp.service.CourseService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CredentialsService;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,8 +77,14 @@ public class PersonalAreaController {
     }
 
     public User getActiveUser(){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = auth.getPrincipal();
+        if(principal instanceof DefaultOidcUser){
+            return this.userService.getUserByEmail(((DefaultOidcUser) principal).getEmail());
+        }
+        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials = this.credentialsService.getCredentials(((UserDetails) principal).getUsername());
+        //Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
         return credentials.getUser();
     }
 
