@@ -43,8 +43,6 @@
 <ul>
     <li th:each="trainer : ${trainers}" > <a th:text="${trainer.name}" th:href="@{'/user/trainer/' + ${trainer.id}}"></a></li>
 </ul>
-<a th:href="@{/register}">Register</a>
-<a th:href="@{/login}">Login</a>
 <footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>

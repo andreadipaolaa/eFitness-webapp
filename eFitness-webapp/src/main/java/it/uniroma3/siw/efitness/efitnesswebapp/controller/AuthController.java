@@ -52,18 +52,19 @@ public class AuthController {
         if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            return "registration-successful";
+            return "login";
         }
         return "register";
     }
 
     @RequestMapping(value = "/default", method = RequestMethod.GET)
-    public String defaultAfterLogin() {
+    public String defaultAfterLogin(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
         if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
-        return "personalArea/personalArea";
+        model.addAttribute("user", credentials.getUser());
+        return "user/personalArea/personalArea";
     }
 }
