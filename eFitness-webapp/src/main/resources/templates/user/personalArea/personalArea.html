@@ -34,10 +34,10 @@
                         <div class="cell" th:text="${course.personalTrainer.name} + ' ' + ${course.personalTrainer.surname}" data-title="#{personal.trainer}"></div>
                         <div class="cell" th:text="${course.room.name}" data-title="#{personal.room}"></div>
                         <div class="cell" th:text="${course.trainingType.name}" data-title="#{personal.trainingType}"></div>
-                        <div class="cell"> <button th:action="@{'/user/personal/subscription/delete/' + ${course.id}}" th:text="#{delete}">Delete</button></div>
+                        <div class="cell"> <button th:action="@{'/personal/subscription/delete/' + ${course.id}}" th:text="#{delete}">Delete</button></div>
                 </div>
             </div>
-            <button th:action="@{/user/personal/subscription/add}" th:text="#{personal.subscription.add}"></button>
+            <button th:action="@{/personal/subscription/add}" th:text="#{personal.subscription.add}"></button>
         </div>
 
     </div>
