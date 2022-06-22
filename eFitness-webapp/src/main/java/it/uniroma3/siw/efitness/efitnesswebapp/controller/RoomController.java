@@ -54,7 +54,8 @@ public class RoomController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteRoomConfirmed(@PathVariable("id")Long id, Model model){
-        FileManager.dirEmptyEndDelete(getUploadDir(this.roomService.getRoomById(id)));
+        if(!(this.roomService.getRoomById(id).getPhoto()==null))
+            FileManager.dirEmptyEndDelete(getUploadDir(this.roomService.getRoomById(id)));
         this.roomService.deleteById(id);
         return getRooms(model);
     }

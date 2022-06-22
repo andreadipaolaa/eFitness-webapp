@@ -77,7 +77,8 @@ public class CourseController {
 
     @RequestMapping(value = {"delete/{id}"}, method = RequestMethod.POST)
     public String deleteCourseConfirmed(@PathVariable("id")Long id, Model model){
-        FileManager.dirEmptyEndDelete(getUploadDir(this.courseService.getCourseById(id)));
+        if(!(this.courseService.getCourseById(id).getPhoto()==null))
+            FileManager.dirEmptyEndDelete(getUploadDir(this.courseService.getCourseById(id)));
         this.courseService.deleteById(id);
         return getCourses(model);
     }

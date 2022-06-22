@@ -9,10 +9,10 @@
     <div class="main-bd">
         <div class="left-side">
             <img src="/images/profile.png" />
-            <div class="profile-side bold">
-                <p><span th:text="#{personal.name}"></span><span th:text="${user.name}">paolo</span></p>
-                <p><span th:text="#{personal.surname}"></span><span th:text="${user.surname}">rossi</span></p>
-                <p><span th:text="#{personal.email}"></span><span th:text="${user.email}">email@email.com</span></p>
+            <div class="profile-side ">
+                <p><span class="bold" th:text="#{personal.name}"></span><span th:text="${user.name}">paolo</span></p>
+                <p><span class="bold" th:text="#{personal.surname}"></span><span th:text="${user.surname}">rossi</span></p>
+                <p><span class="bold" th:text="#{personal.email}"></span><span th:text="${user.email}">email@email.com</span></p>
             </div>
             <form th:action="@{/logout}">
                 <button type="submit">Logout</button>
@@ -34,12 +34,13 @@
                         <div class="cell" th:text="${course.personalTrainer.name} + ' ' + ${course.personalTrainer.surname}" data-title="#{personal.trainer}"></div>
                         <div class="cell" th:text="${course.room.name}" data-title="#{personal.room}"></div>
                         <div class="cell" th:text="${course.trainingType.name}" data-title="#{personal.trainingType}"></div>
-                        <div class="cell"> <button th:action="@{'/user/personal/subscription/delete/' + ${course.id}}" th:text="#{delete}">Delete</button></div>
+                        <div class="cell"><form th:action="@{'/personal/subscription/delete/' + ${course.id}}"> <button th:text="#{delete}">Delete</button></form> </div>
                 </div>
             </div>
-            <button th:action="@{/user/personal/subscription/add}" th:text="#{personal.subscription.add}"></button>
+            <form th:action="@{/personal/subscription/add}">
+                <button th:text="#{personal.subscription.add}"></button>
+            </form>
         </div>
-
     </div>
 </section>
 <footer th:replace="fragments/base.html :: footer"></footer>
