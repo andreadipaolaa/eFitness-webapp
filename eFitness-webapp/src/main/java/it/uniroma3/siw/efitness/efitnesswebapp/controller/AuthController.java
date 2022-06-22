@@ -3,11 +3,15 @@ package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Credentials;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.User;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.CredentialsService;
+import it.uniroma3.siw.efitness.efitnesswebapp.service.UserService;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.CredentialsValidator;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +24,11 @@ public class AuthController {
     @Autowired
     private CredentialsService credentialsService;
 
+    @Autowired
+    private UserService userService;
+
     @Autowired private UserValidator userValidator;
+
     @Autowired private CredentialsValidator credentialsValidator;
 
 
@@ -59,8 +67,11 @@ public class AuthController {
 
     @RequestMapping(value = "/default", method = RequestMethod.GET)
     public String defaultAfterLogin(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof DefaultOidcUser) {
+            model.addAttribute("user", this.userService.getUserByEmail(((DefaultOidcUser) principal).getEmail()));
+        }
+        Credentials credentials = this.credentialsService.getCredentials(((UserDetails) principal).getUsername());
         if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
