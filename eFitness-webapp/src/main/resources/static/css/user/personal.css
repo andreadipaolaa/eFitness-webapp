@@ -1,6 +1,7 @@
 body{
     font-size: 1.5rem;
     color: #3b3b3b;
+    background-image: url("/images/background.png");
 }
 
 .main-bd {
