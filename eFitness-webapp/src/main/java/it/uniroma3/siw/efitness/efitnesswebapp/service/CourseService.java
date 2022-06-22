@@ -1,6 +1,7 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
+import it.uniroma3.siw.efitness.efitnesswebapp.model.User;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,17 @@ public class CourseService {
         toModify.setTrainingType(course.getTrainingType());
         toModify.setPhoto(course.getPhoto());
         save(toModify);
+    }
+
+    @Transactional
+    public void addUser(Course course, User user){
+        course.getUsers().add(user);
+        save(course);
+    }
+
+    @Transactional
+    public void removeUser(Course course, User user){
+        course.getUsers().remove(user);
+        save(course);
     }
 }

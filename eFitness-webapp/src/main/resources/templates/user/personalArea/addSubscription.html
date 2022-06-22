@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+        th:replace="fragments/base.html :: headerfiles(title='Add a subscription', css='/css/user/personal.css')">
+</head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<section>
+        <h1>Choose the course you wanna make a subscription to</h1>
+    <div  th:each="course : ${courses}">
+        <input th:id="${course.id}" type="radio" name="course" th:value="${course.id}" required>
+        <label th:for="${course.id}"></label>
+        <span th:text="${course.name}"></span>
+    </div>
+</section>
+<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>
