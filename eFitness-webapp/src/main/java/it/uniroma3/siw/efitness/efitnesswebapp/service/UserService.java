@@ -54,4 +54,8 @@ public class UserService {
         user.getCourses().remove(course);
         saveUser(user);
     }
+
+    public User getUserByEmail(String email){
+        return userRepository.findByEmail(email).get();
+    }
 }
