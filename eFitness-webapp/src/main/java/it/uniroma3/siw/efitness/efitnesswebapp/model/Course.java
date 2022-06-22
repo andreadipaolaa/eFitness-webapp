@@ -36,4 +36,6 @@ public class Course {
 
     private String photo;
 
+    private int maxSubscriptions;
+
 }

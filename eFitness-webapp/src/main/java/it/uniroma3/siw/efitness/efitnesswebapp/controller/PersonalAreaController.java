@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -78,9 +79,11 @@ public class PersonalAreaController {
     }
 
     public List<Course> getPotentialSubscriptions(User user){
-        List<Course> potentialCourses = this.courseService.getAll();
-        for(Course c : user.getCourses()){
-            potentialCourses.remove(c);
+        List<Course> potentialCourses = new ArrayList<Course>();
+        for(Course course : this.courseService.getAll()) {
+            if (!(user.getCourses().contains(course) || course.getUsers().size() == course.getMaxSubscriptions())) {
+                potentialCourses.add(course);
+            }
         }
         return potentialCourses;
     }

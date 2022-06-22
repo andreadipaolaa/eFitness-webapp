@@ -7,6 +7,7 @@
     <div>
         <div th:text="#{infos}">infos</div>
         <input class="form-input" spellcheck="false" type="text" th:field="*{name}" placeholder="Name" required />
+        <input class="form-input" spellcheck="false" type="number" th:field="*{maxSubscriptions}" placeholder="Max number of participants" required />
         <textarea class="form-textarea" spellcheck="false" type="text" th:field="*{description}" placeholder="Description" required />
     </div>
 
