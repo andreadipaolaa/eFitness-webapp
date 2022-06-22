@@ -7,8 +7,7 @@
 <header th:replace="fragments/base.html :: intestazione"></header>
 <section class="detail">
 <div class="singleton">
-  <img th:if="${room.photo != null}"
-       th:src="'/images/room/'+${room.photo}"></img>
+  <img src="'/images/room/' + ${room.photo}" onerror="this.onerror=null; this.src='/images/defaultRoom.jpg'" alt="">
   <div class="info">
     <h1 th:text="${room.name}">Paolo Rossi</h1>
     <p th:text="${room.description}">

@@ -24,13 +24,14 @@ body{
     padding: 2%;
     margin: 5%;
     background-color: white;
-
+    border-radius: 10px;
 }
 
 .right-side{
     padding: 2%;
     margin: 5%;
     background-color: white;
+    border-radius: 10px;
 }
 
 .left-side img{
