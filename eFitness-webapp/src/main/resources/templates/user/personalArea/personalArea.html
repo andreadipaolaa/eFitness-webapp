@@ -9,10 +9,10 @@
     <div class="main-bd">
         <div class="left-side">
             <img src="/images/profile.png" />
-            <div class="profile-side bold">
-                <p><span th:text="#{personal.name}"></span><span th:text="${user.name}">paolo</span></p>
-                <p><span th:text="#{personal.surname}"></span><span th:text="${user.surname}">rossi</span></p>
-                <p><span th:text="#{personal.email}"></span><span th:text="${user.email}">email@email.com</span></p>
+            <div class="profile-side ">
+                <p><span class="bold" th:text="#{personal.name}"></span><span th:text="${user.name}">paolo</span></p>
+                <p><span class="bold" th:text="#{personal.surname}"></span><span th:text="${user.surname}">rossi</span></p>
+                <p><span class="bold" th:text="#{personal.email}"></span><span th:text="${user.email}">email@email.com</span></p>
             </div>
             <form th:action="@{/logout}">
                 <button type="submit">Logout</button>

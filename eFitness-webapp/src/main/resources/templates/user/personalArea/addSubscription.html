@@ -6,7 +6,7 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 <section>
-        <h1>Choose the course you wanna make a subscription to</h1>
+        <h1>Choose the course you want to make a subscription to</h1>
     <form th:action="@{/personal/subscription/add}"  method="post">
     <div  th:each="course : ${courses}">
         <input th:id="${course.id}" type="radio" name="course" th:value="${course.id}" required>
