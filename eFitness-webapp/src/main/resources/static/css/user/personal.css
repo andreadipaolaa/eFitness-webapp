@@ -1,5 +1,4 @@
 body{
-    font-size: 1.5rem;
     color: #3b3b3b;
     background-image: url("/images/background.png");
 }
@@ -9,7 +8,8 @@ body{
     display: flex;
     flex-direction: row;
     align-items: start;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 70%;
 }
 
 .bold{
@@ -17,11 +17,20 @@ body{
 }
 
 .left-side {
-    width: 30vw;
+    width: 30%;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
-    padding: 5%;
+    padding: 2%;
+    margin: 5%;
+    background-color: white;
+
+}
+
+.right-side{
+    padding: 2%;
+    margin: 5%;
+    background-color: white;
 }
 
 .left-side img{
@@ -32,6 +41,7 @@ body{
 
 h2{
     font-size: 2rem;
+    margin-top: -2%;
 }
 
 .wrapper{
@@ -89,11 +99,36 @@ button:hover, button:checked{
     text-align: center;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
+    background-color: white;
+}
+
+@media (max-width: 1050px) {
+    .main-bd{
+        flex-direction: column;
+    }
+
+    .left-side{
+        width: 100%;
+    }
+    .right-side{
+        width: 100%;
+    }
 
 }
 
 
-@media(max-width: 580px){
+@media(max-width: 880px){
+
+    .main-bd{
+        flex-direction: column;
+    }
+
+    .left-side{
+        width: 100%;
+    }
+    .right-side{
+        width: 100%;
+    }
 
     .table {
         display: block;

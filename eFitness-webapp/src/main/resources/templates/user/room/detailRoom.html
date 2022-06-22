@@ -5,6 +5,7 @@
 </head>
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
+<section class="detail">
 <div class="singleton">
   <img th:if="${room.photo != null}"
        th:src="'/images/room/'+${room.photo}"></img>
@@ -15,7 +16,7 @@
     </p>
   </div>
 </div>
-
+</section>
 <footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>

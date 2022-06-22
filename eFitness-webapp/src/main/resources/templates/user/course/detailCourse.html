@@ -5,6 +5,7 @@
 </head>
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
+<section class="detail">
 <div class="singleton">
     <img th:if="${course.photo != null}"
          th:src="'/images/course/' + ${course.photo}"></img>
@@ -20,7 +21,7 @@
         <p th:text="#{course.detail.trainer}"> <span> <a th:text="${course.personalTrainer.name} + ' ' +  ${course.personalTrainer.surname}" th:href="@{'/user/room/' + ${course.room.id}}"> </a> </span> </p>
     </div>
 </div>
-
+</section>
 <footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>

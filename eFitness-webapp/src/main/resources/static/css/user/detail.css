@@ -1,6 +1,14 @@
+body{
+    background-image: url("/images/background.png");
+}
+
+.detail{
+    margin-top: 5%;
+}
+
 .singleton {
-    width: 90%;
-    font-size: 2rem;
+    width: 65%;
+    font-size: 1.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

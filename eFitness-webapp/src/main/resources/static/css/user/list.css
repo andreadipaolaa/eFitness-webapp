@@ -1,3 +1,10 @@
+body{
+    background-image: url("/images/background.png");
+}
+
+h1{
+    color: forestgreen;
+}
 
 h3{
     margin: 0.8rem;
@@ -26,6 +33,7 @@ h3{
     margin: 20px;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
     padding: 0.5%;
+    background-color: white;
 }
 
 .card-image {
@@ -49,3 +57,13 @@ h3{
 }
 
 @media screen and (max-width: 34rem) { html { font-size: 20px; } }
+
+@media (max-width: 900px) {
+    .cards{
+        flex-direction: column;
+    }
+    .card{
+        width: 90%;
+        max-width: 100%;
+    }
+}
