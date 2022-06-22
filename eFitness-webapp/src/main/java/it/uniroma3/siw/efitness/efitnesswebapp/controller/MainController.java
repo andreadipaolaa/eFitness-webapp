@@ -1,23 +1,16 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.controller;
 
 import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
-import it.uniroma3.siw.efitness.efitnesswebapp.model.Credentials;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.PersonalTrainer;
-import it.uniroma3.siw.efitness.efitnesswebapp.model.User;
 import it.uniroma3.siw.efitness.efitnesswebapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
-@Controller
-@RequestMapping("/user/")
+@Controller @RequestMapping("/user/")
 public class MainController {
 
     @Autowired
@@ -28,12 +21,6 @@ public class MainController {
 
     @Autowired
     private RoomService roomService;
-
-    @Autowired
-    private CredentialsService credentialsService;
-
-    @Autowired
-    private UserService userService;
 
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String getHome(Model model){
@@ -77,8 +64,4 @@ public class MainController {
         model.addAttribute("room", this.roomService.getRoomById(idRoom));
         return "user/room/detailRoom";
     }
-
-
-
-
 }

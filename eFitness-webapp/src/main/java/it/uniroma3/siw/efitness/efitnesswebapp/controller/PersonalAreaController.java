@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("/personal/")
+@Controller @RequestMapping("/personal/")
 public class PersonalAreaController {
 
     @Autowired

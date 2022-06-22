@@ -35,11 +35,9 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/default")
 
-                /*
                 //google login
-                .and().oauth2Login()
-                .loginPage("/login")
-                .defaultSuccessUrl("/defaultGoogle")*/
+                .and().oauth2Login().loginPage("/login")
+                .defaultSuccessUrl("/defaultGoogle")
 
                 //logout
                 .and()
