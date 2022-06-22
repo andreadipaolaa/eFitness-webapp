@@ -7,11 +7,9 @@ import it.uniroma3.siw.efitness.efitnesswebapp.service.UserService;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.CredentialsValidator;
 import it.uniroma3.siw.efitness.efitnesswebapp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +28,6 @@ public class AuthController {
     @Autowired private UserValidator userValidator;
 
     @Autowired private CredentialsValidator credentialsValidator;
-
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerForm (Model model) {
@@ -70,6 +67,7 @@ public class AuthController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof DefaultOidcUser) {
             model.addAttribute("user", this.userService.getUserByEmail(((DefaultOidcUser) principal).getEmail()));
+            return "user/personalArea/personalArea";
         }
         Credentials credentials = this.credentialsService.getCredentials(((UserDetails) principal).getUsername());
         if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
@@ -77,5 +75,19 @@ public class AuthController {
         }
         model.addAttribute("user", credentials.getUser());
         return "user/personalArea/personalArea";
+    }
+
+    @RequestMapping(value = "/defaultGoogle", method = RequestMethod.GET)
+    public String defaultAfterLoginGoogle(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User googleUser =  this.userService.getUserByEmail(((DefaultOidcUser) principal).getEmail());
+        if (googleUser == null) {
+            googleUser = new User();
+        }
+        googleUser.setEmail(((DefaultOidcUser) principal).getEmail());
+        googleUser.setName(((DefaultOidcUser) principal).getGivenName());
+        googleUser.setSurname(((DefaultOidcUser) principal).getFamilyName());
+        userService.saveUser(googleUser);
+        return defaultAfterLogin(model);
     }
 }
