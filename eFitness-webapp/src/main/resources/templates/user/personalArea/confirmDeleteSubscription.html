@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/base.html :: headerfiles(title=#{delete}, css='/css/user/personal.css')"></head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<div th:text="#{delete.confirm}+ #{subscription.delete}' ['+${course.name}+']?'">Sure delete</div>
+<form th:action="@{'/user/personal/subscription/delete' + ${course.id}}" method="post">
+    <button type="submit" th:text="#{confirm}">Delete</button>
+</form>
+</body>
+</html>

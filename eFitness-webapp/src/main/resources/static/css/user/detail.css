@@ -1,7 +1,6 @@
 .singleton {
     width: 90%;
     font-size: 2rem;
-    margin-top: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -57,7 +56,6 @@ h1 {
     .singleton {
         width: 90%;
         font-size: 2rem;
-        margin-top: 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;

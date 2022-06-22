@@ -1,5 +1,6 @@
 package it.uniroma3.siw.efitness.efitnesswebapp.service;
 
+import it.uniroma3.siw.efitness.efitnesswebapp.model.Course;
 import it.uniroma3.siw.efitness.efitnesswebapp.model.User;
 import it.uniroma3.siw.efitness.efitnesswebapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,17 @@ public class UserService {
         for(User user : iterable)
             result.add(user);
         return result;
+    }
+
+    @Transactional
+    public void addCourse(Course course, User user){
+        user.getCourses().add(course);
+        saveUser(user);
+    }
+
+    @Transactional
+    public void removeCourse(Course course, User user){
+        user.getCourses().remove(course);
+        saveUser(user);
     }
 }
