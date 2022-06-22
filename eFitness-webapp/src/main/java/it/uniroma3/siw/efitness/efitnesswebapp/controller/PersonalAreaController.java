@@ -42,7 +42,9 @@ public class PersonalAreaController {
 
     @RequestMapping(value={"subscription/add"}, method = RequestMethod.GET)
     public String subscriptionIntention(Model model){
-        model.addAttribute("courses", getPotentialSubscriptions(getActiveUser()));
+        List<Course> potentialCourses= getPotentialSubscriptions(getActiveUser());
+        if(potentialCourses.size()>0)
+            model.addAttribute("courses", potentialCourses);
         return "user/personalArea/addSubscription";
     }
 

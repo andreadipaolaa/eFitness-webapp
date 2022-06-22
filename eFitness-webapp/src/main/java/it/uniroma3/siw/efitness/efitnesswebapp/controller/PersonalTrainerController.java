@@ -24,7 +24,7 @@ public class PersonalTrainerController {
     @Autowired
     private PersonalTrainerValidator personalTrainerValidator;
 
-    public static String DIR = System.getProperty("user.dir")+"/eFitness-webapp/src/main/resources/static/images/personalTrainer/";
+    public static String DIR = System.getProperty("user.dir")+"/personalTrainer/src/main/resources/static/images/personalTrainer/";
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String getTrainers(Model model) {
