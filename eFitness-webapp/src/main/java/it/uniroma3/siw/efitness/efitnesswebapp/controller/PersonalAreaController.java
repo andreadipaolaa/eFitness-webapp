@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -42,12 +43,14 @@ public class PersonalAreaController {
         return "user/personalArea/addSubscription";
     }
 
-    @RequestMapping(value = {"subscription/add/{id}"}, method = RequestMethod.POST)
-    public String addSubscription(@PathVariable("id") Long idCourse, Model model){
+    @RequestMapping(value = {"subscription/add"}, method = RequestMethod.POST)
+    public String addSubscription(@RequestParam("course") Long idCourse, Model model){
         Course course = this.courseService.getCourseById(idCourse);
         User user = getActiveUser();
-        this.courseService.addUser(course, user);
-        this.userService.addCourse(course, user);
+        if(! user.getCourses().contains(course)) {
+            this.courseService.addUser(course, user);
+            this.userService.addCourse(course, user);
+        }
         model.addAttribute("user", user);
         return "user/personalArea/personalArea";
     }
