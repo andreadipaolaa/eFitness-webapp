@@ -5,16 +5,21 @@
 </head>
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-<section>
-        <h1>Choose the course you wanna make a subscription to</h1>
+<section class="box-parent">
+    <div th:if="${courses}" class="box">
+    <h1>Choose the course you wanna make a subscription to</h1>
     <form th:action="@{/personal/subscription/add}"  method="post">
     <div  th:each="course : ${courses}">
         <input th:id="${course.id}" type="radio" name="course" th:value="${course.id}" required>
         <label th:for="${course.id}"></label>
         <span th:text="${course.name}"></span>
     </div>
-        <button type="submit"> Add</button>
+        <button class="btn-form" type="submit"> Add</button>
     </form>
+    </div>
+    <div th:unless="${courses}" class="box">
+        <h1>There are currently no courses available for you</h1>
+    </div>
 </section>
 <footer th:replace="fragments/base.html :: footer"></footer>
 </body>

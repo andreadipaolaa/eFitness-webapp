@@ -19,7 +19,7 @@ body{
     width: 30vw;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
     padding: 5%;
 }
 
@@ -66,10 +66,31 @@ button{
     background-color: forestgreen;
 }
 
+.btn-form{
+    margin-top: 4%;
+}
+
 button:hover, button:checked{
     background-color: #dddddd;
     color: #333333;
 }
+
+.box-parent{
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+
+}
+
 
 @media(max-width: 580px){
 
