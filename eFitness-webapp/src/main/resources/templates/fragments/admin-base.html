@@ -12,12 +12,15 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-	<header th:fragment="header(name)" class="nav-bar">
-		<a href="/default"><ion-icon class="home" name="home"></ion-icon></a>
-		<h4 th:text="${name}">header name</h4>
-		<a class="button2" th:href="@{/logout}">Logout</a>
-		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-	</header>
+<header th:fragment="header(name)" class="nav-bar">
+	<div>
+		<a href="/"><ion-icon class="home" name="home"></ion-icon></a>
+		<a href="/default"><ion-icon class="home" name="cog-outline"></ion-icon></a>
+	</div>
+	<h4 th:text="${name}">header name</h4>
+	<a class="button2" th:href="@{/logout}">Logout</a>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</header>
 </body>
 </html>

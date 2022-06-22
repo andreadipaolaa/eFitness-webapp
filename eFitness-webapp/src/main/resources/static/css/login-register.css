@@ -5,52 +5,34 @@ html{
 }
 
 .principal-box{
-    position:relative;
-    margin: auto auto 20%;
-    transform: translateY(20%);
+    margin: 2rem auto;
     width: 16rem;
     background-color: #fff;
     padding: 0.6rem;
     border-radius: 0.2rem;
+    height: fit-content;
 }
 
-.login-box{
-    height: 20rem;
-}
-.register-box{
-    height: auto;
-}
-.lb-header{
-    position:relative;
-    color: #00415d;
+#title{
     margin: 0.3rem 0.3rem .6rem .3rem;
     padding-bottom: .6rem;
     border-bottom: .08rem solid #eee;
     text-align:center;
     height: 1.8rem;
-}
-.lb-header a{
-    text-decoration: none;
-    color: #666;
-    font-weight: bold;
-    font-size: 1rem;
-}
-#title{
     color: #029f5b;
     font-size: 1.6rem;
     font-weight: bold;
 }
+
 .google-login{
-    position:relative;
-    width: 100%;
     padding: 0.6rem 0 1.4rem 0;
     border-bottom: 0.08rem solid #eee;
     text-align:center;
 }
+
 .google-login a{
     text-decoration: none;
     color: #fff;
-    border: 0.08rem solid rgba(0,0,0,0.05);
     padding: 0.7rem;
     border-radius: 0.15rem;
     font-size: 0.7rem;
@@ -58,17 +40,20 @@ html{
     text-align:center;
     background-color: #DF4A32;
 }
-.login, .signup{
+
+form {
     position:relative;
     width: 100%;
     height:auto;
     margin-top: 1.25rem;
     text-align:center;
 }
+
 .u-form-group{
     width:100%;
     margin-bottom: 0.7rem;
 }
+
 .u-form-group input{
     width: 50%;
     height: 2rem;
@@ -78,11 +63,12 @@ html{
     border-radius: 0.15rem;
     color: #333;
     font-size: 0.8rem;
-    transition:all 0.1s linear;
 }
+
 .u-form-group input:focus{
     border-color: #358efb;
 }
+
 .u-form-group button{
     width:50%;
     background-color: #1CB94E;
@@ -91,20 +77,23 @@ html{
     color: #fff;
     font-size: 1rem;
     font-weight: normal;
-    padding: 1rem 0;
+    padding: .5rem 0;
     border-radius: .15rem;
     text-transform: uppercase;
 }
+
 .not-registered{
     text-decoration: none;
     color: #888;
     font-size: 0.75rem;
 }
+
 .register{
     text-decoration: underline;
     color: #888;
     font-size: 0.75rem;
 }
+
 .errors{
     font-size: 0.75rem;
     color: red;
