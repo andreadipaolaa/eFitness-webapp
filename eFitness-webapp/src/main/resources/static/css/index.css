@@ -29,7 +29,7 @@ html, body {
 
 .carousel-item img {
     display: block;
-    max-height: 1120px;
+    max-height: 770px;
     width: 100%;
     object-fit: cover;
 }
